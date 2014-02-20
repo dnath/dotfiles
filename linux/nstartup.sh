@@ -11,21 +11,36 @@ fi
 
 echo 'Repo Update command = ' $cmd
 
-echo 'Installing curl...'
-sudo $cmd -y install curl
+if [ -z "$(command -v curl)" ]; then
+  echo 'Installing curl...'
+  sudo $cmd -y install curl
+fi
 
-echo 'Installing vim...'
-sudo $cmd -y install vim
+if [ -z "$(command -v vim)" ]; then
+  echo 'Installing vim...'
+  sudo $cmd -y install vim
+fi
 
-echo 'Installing git...'
-sudo $cmd -y install git
+if [ -z "$(command -v git)" ]; then
+  echo 'Installing git...'
+  sudo $cmd -y install git
+fi
 
-echo 'Installing openjdk-7-jdk icedtea-7-plugin...'
-sudo $cmd -y install openjdk-7-jdk icedtea-7-plugin
+if [ -z "$(command -v javac)" ]; then
+  echo 'Installing openjdk-7-jdk icedtea-7-plugin...'
+  sudo $cmd -y install openjdk-7-jdk icedtea-7-plugin
+fi
 
-echo 'Installing zsh...'
-sudo $cmd -y install zsh
+if [ -z "$(command -v zsh)" ]; then
+  echo 'Installing zsh...'
+  sudo $cmd -y install zsh
+fi
 echo 'Setting zsh as default shell... [Relogin to get zsh]'
 sudo chsh -s "$(which zsh)"
 
-
+if [ -d '~/.oh-my-zsh' ]; then
+  echo 'ohmyzsh already installed !'
+else
+  echo 'Installing oh-my-zsh...'
+  curl -L "https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh" | sh
+fi
