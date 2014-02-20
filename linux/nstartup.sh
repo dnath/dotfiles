@@ -38,7 +38,7 @@ fi
 echo 'Setting zsh as default shell... [Relogin to get zsh]'
 sudo chsh -s "$(which zsh)"
 
-if [ -d '~/.oh-my-zsh' ]; then
+if [ -d "~/.oh-my-zsh" ]; then
   echo 'ohmyzsh already installed !'
 else
   echo 'Installing oh-my-zsh...'
