@@ -21,6 +21,8 @@ set shiftwidth=2
 set expandtab	
 
 set ruler
+" Format the status line
+set statusline=%f\ %m%r%h\ %w\ %y\ %=Line:\ %l\ Column:\ %c
 
 " set textwidth=79
 " set colorcolumn=80
