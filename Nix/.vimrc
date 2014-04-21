@@ -1,4 +1,5 @@
 set nu
+highlight LineNr ctermbg=black
 
 set noignorecase
 set hlsearch
@@ -19,7 +20,27 @@ set tabstop=2
 set shiftwidth=2
 set expandtab	
 
+set ruler
+
+" set textwidth=79
+" set colorcolumn=80
+
+""" pathogen.vim
+execute pathogen#infect()
+call pathogen#helptags()    " generate helptags for everything in 'runtimepath'
+" syntax on
+filetype plugin indent on
+
 if has('syntax') && (&t_Co > 2)
   syntax on
 endif
+
+""" NERDTree
+" Ctrl+N Shortcut
+map <C-n> :NERDTreeToggle<CR>
+" open NERDTree
+au VimEnter * if &filetype !=# 'gitcommit' | NERDTree | wincmd p | endif
+au BufEnter * lcd %:p:h " set pwd
+" close vim if the only window left open is a NERDTree
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
