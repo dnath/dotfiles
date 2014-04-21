@@ -1,5 +1,5 @@
 # git
-alias gs='git status -sb'
+alias gsb='git status -sb'
 
 # ls
 alias ls='ls -hF -G'
