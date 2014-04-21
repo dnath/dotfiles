@@ -131,7 +131,7 @@ prompt_hg() {
 
 # Current Time
 prompt_time() {
-  prompt_segment black blue "%D{%I:%M:%S}"
+  prompt_segment black blue "%D{%H:%M:%S}"
 }
 
 # Dir: current working directory
