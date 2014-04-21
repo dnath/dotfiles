@@ -26,6 +26,16 @@ if [ -z "$(command -v git)" ]; then
   sudo $cmd -y install git
 fi
 
+if [ -z "$(command -v gcc)" ]; then
+  echo 'Installing gcc...'
+  sudo $cmd -y install gcc
+fi
+
+if [ -z "$(command -v make)" ]; then
+  echo 'Installing build-essential...'
+  sudo $cmd -y install build-essential
+fi
+
 #if [ -z "$(command -v javac)" ]; then
 #  echo 'Installing openjdk-7-jdk icedtea-7-plugin...'
 #  sudo $cmd -y install openjdk-7-jdk icedtea-7-plugin
