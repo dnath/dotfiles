@@ -19,6 +19,19 @@ fi
 if [ -z "$(command -v vim)" ]; then
   echo 'Installing vim...'
   sudo $cmd -y install vim
+ fi
+
+if [ -f ~/.vim/autoload/pathogen.vim ]; then
+  echo 'Installing pathogen...'
+  mkdir -p ~/.vim/autoload ~/.vim/bundle; \
+    curl -Sso ~/.vim/autoload/pathogen.vim \
+        https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
+fi
+
+if [ -d ~/.vim/bundle/nerdtree ]; then
+  echo 'Installing nerdtree...'
+  cd ~/.vim/bundle
+  git clone https://github.com/scrooloose/nerdtree.git
 fi
 
 if [ -z "$(command -v git)" ]; then
