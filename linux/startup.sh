@@ -19,7 +19,7 @@ fi
 if [ -z "$(command -v vim)" ]; then
   echo 'Installing vim...'
   sudo $cmd -y install vim
- fi
+fi
 
 if [ -f ~/.vim/autoload/pathogen.vim ]; then
   echo 'Installing pathogen...'
