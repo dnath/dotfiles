@@ -46,3 +46,6 @@ au BufEnter * lcd %:p:h " set pwd
 " close vim if the only window left open is a NERDTree
 autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+" Remember last cursor position
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
