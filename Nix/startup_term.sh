@@ -94,7 +94,7 @@ if [ ! -f ~/.oh-my-zsh/themes/agnoster_mod.zsh-theme ]; then
 fi
 
 ## add to zshrc
-if [ -f ~/.zshrc  && append_zshrc = true ]; then
+if [ -f ~/.zshrc  && $append_zshrc = true ]; then
   curl -Sso zshrc_tmp https://raw.github.com/dnath/config/master/Nix/.zshrc
   cat zshrc_tmp >> ~/.zshrc
   rm -f zshrc_tmp
