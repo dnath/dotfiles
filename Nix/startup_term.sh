@@ -22,7 +22,7 @@ handle_params( ) {
     
     ## append zshrc
     if [ $param = '-z' ]; then
-      append_zshrc=true
+      append_zshrc="true"
     fi
   done
 }
@@ -44,7 +44,7 @@ check_time_stamp( ) {
   fi
 }
 
-append_zshrc=false
+append_zshrc="false"
 handle_params $*
 
 ### vim
@@ -94,7 +94,7 @@ if [ ! -f ~/.oh-my-zsh/themes/agnoster_mod.zsh-theme ]; then
 fi
 
 ## add to zshrc
-if [ -f ~/.zshrc  && $append_zshrc = true ]; then
+if [ -f ~/.zshrc  && $append_zshrc = "true" ]; then
   curl -Sso zshrc_tmp https://raw.github.com/dnath/config/master/Nix/.zshrc
   cat zshrc_tmp >> ~/.zshrc
   rm -f zshrc_tmp
