@@ -1,5 +1,7 @@
+
 # git
 alias gsb='git status -sb'
+alias glog='git log'
 
 # ls
 alias ls='ls -hF -G'
