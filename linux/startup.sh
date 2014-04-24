@@ -62,4 +62,4 @@ sudo chsh -s "$(which zsh)"
 
 ## calling startup_term.sh 
 echo 'Calling startup_term.sh ...'
-curl -L https://raw.github.com/dnath/config/master/Nix/startup_term.sh | sh
+curl -L https://raw.github.com/dnath/config/master/Nix/startup_term.sh | bash append_zshrc
