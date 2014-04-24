@@ -27,7 +27,7 @@ if [ -f ~/.vim/autoload/pathogen.vim ]; then
 fi
 
 ## nerdtree
-if [ ! -d ~/.vim/bundle/nerdtree ]; then
+if [ ! -d ~/.vim/bundle/nerdtree_plugin ]; then
   echo 'Installing nerdtree...'
   git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle
 fi
