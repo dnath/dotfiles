@@ -19,7 +19,7 @@ check_time_stamp( ) {
 
 ### vim
 ##  pathogen
-if [ -f ~/.vim/autoload/pathogen.vim ]; then
+if [ ! -f ~/.vim/autoload/pathogen.vim ]; then
   echo 'Installing pathogen...'
   mkdir -p ~/.vim/autoload ~/.vim/bundle; \
     curl -Sso ~/.vim/autoload/pathogen.vim \
