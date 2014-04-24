@@ -1,5 +1,20 @@
 #! /bin/sh
 
+## force re-download and setup
+if [ $1 = '-f' ]; then
+  rm -f ~/.vim/autoload/pathogen.vim
+  rm -rf ~/.vim/bundle/nerdtree
+  rm -f ~/.vimrc
+  rm -rf ~/.oh-my-zsh
+fi
+
+## help
+if [ $1 = '-h' ]; then
+  echo 'startup_term.sh [-f] [-h]'
+  echo '-f : force re-download and setup'
+  echo '-h : help'
+fi
+
 ## check time stamps of two files
 check_time_stamp( ) {
   if [ $(uname) = 'Darwin' ]; then
@@ -55,5 +70,6 @@ if [ ! -f ~/.oh-my-zsh/themes/agnoster_mod.zsh-theme ]; then
   echo 'Copying my modified version of agnoster'
   curl -Sso ~/.oh-my-zsh/themes/agnoster_mod.zsh-theme \
     https://raw.github.com/dnath/config/master/Nix/agnoster_mod.zsh-theme
+  sed -i '/ZSH_THEME="robbyrussel"/c\ZSH_THEME="agnoster_mod"' ~/.zshrc
 fi
 
