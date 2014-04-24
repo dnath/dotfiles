@@ -5,7 +5,7 @@ handle_params( ) {
   for param in $*
   do
     ## force re-download and setup
-    if [ $param = '-f' ]; then
+    if [[ $param = 'force' || $param = '-f' ]]; then
       rm -f ~/.vim/autoload/pathogen.vim
       rm -rf ~/.vim/bundle/nerdtree
       rm -f ~/.vimrc
@@ -13,7 +13,7 @@ handle_params( ) {
     fi
     
     ## help
-    if [ $param = '-h' ]; then
+    if [[ $param = 'help' || $param = '-h' ]]; then
       echo 'startup_term.sh [-f] [-h]'
       echo '-f : force re-download and setup'
       echo '-h : help'
@@ -21,7 +21,7 @@ handle_params( ) {
     fi
     
     ## append zshrc
-    if [ $param = 'append_zshrc' ]; then
+    if [[ $param = 'append_zshrc' || $param = '-z' ]]; then
       append_zshrc="true"
     fi
   done
