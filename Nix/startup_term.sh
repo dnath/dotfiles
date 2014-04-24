@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 ## handle parameters
 handle_params( ) {
@@ -21,7 +21,7 @@ handle_params( ) {
     fi
     
     ## append zshrc
-    if [ $param = '-z' ]; then
+    if [ $param = 'append_zshrc' ]; then
       append_zshrc="true"
     fi
   done
