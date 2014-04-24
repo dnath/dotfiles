@@ -33,10 +33,10 @@ if [ ! -d ~/.vim/bundle/nerdtree ]; then
 fi
 
 ## vimrc
-vimrc='~/.vimrc'
-if [ ! -f $vimrc ]; then
+# vimrc="~/.vimrc" # readlink -f
+if [ ! -f ~/.vimrc ]; then
   echo 'Copying vimrc ...'
-  curl -Sso $vimrc https://raw.github.com/dnath/config/master/Nix/.vimrc
+  curl -Sso ~/.vimrc https://raw.github.com/dnath/config/master/Nix/.vimrc
 # else
   # tmp='_tmp'
   # vimrc_tmp="$vimrc$tmp"
