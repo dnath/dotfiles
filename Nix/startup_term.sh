@@ -27,14 +27,15 @@ if [ -f ~/.vim/autoload/pathogen.vim ]; then
 fi
 
 ## nerdtree
-if [ ! -d ~/.vim/bundle/nerdtree_plugin ]; then
+if [ ! -d ~/.vim/bundle/nerdtree ]; then
   echo 'Installing nerdtree...'
-  git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle
+  git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
 fi
 
 ## vimrc
 vimrc='~/.vimrc'
 if [ ! -f $vimrc ]; then
+  echo 'Copying vimrc ...'
   curl -Sso $vimrc https://raw.github.com/dnath/config/master/Nix/.vimrc
 # else
   # tmp='_tmp'
