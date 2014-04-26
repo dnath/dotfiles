@@ -80,6 +80,7 @@ fi
 if [ ! -d ~/.oh-my-zsh ]; then
   echo 'Installing oh-my-zsh...'
   curl -SsL "https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh" | sh
+  append_zshrc="true"
 fi
 
 ## oh-my-zsh theme
