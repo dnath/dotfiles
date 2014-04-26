@@ -29,10 +29,10 @@ handle_params( ) {
 
 ## check time stamps of two files
 check_time_stamp( ) {
-  if [ $(uname) = 'Darwin' ]; then
+  if [ $(uname) = 'Darwin' ]; then # for OSX
     file1_ts=`stat -f "%m" $1`
     file2_ts=`stat -f "%Y" $1`
-  else
+  else                             # for Linux
     file1_ts=`stat -c "%Y" $1`
     file2_ts=`stat -c "%Y" $1`
   fi
