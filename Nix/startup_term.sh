@@ -104,3 +104,15 @@ if [ -f ~/.zshrc  ]; then
   fi
 fi
 
+### python
+## add .pystartup
+if [ ! -f ~/.pystartup ]; then
+  echo 'Adding ~/.pystartup...'
+  curl -Sso ~/.pystartup "https://raw.githubusercontent.com/dnath/config/master/Nix/.pystartup"
+  if [[ -z $(grep '^export PYTHONSTARTUP=~/.pystartup' ~/.zshrc) ]]; then
+    echo 'Adding PYTHONSTARTUP env var...'
+    cat '# python startup' >> ~/.zshrc
+    cat 'export PYTHONSTARTUP=~/.pystartup' >> ~/.zshrc
+  fi
+fi
+
