@@ -66,11 +66,11 @@ fi
 # vimrc="~/.vimrc" # readlink -f
 if [ ! -f ~/.vimrc ]; then
   echo 'Copying vimrc ...'
-  curl -Sso ~/.vimrc https://raw.github.com/dnath/config/master/Nix/.vimrc
+  curl -Sso ~/.vimrc https://raw.githubusercontent.com/dnath/config/master/Nix/.vimrc
 # else
   # tmp='_tmp'
   # vimrc_tmp="$vimrc$tmp"
-  # curl -Sso $vimrc_tmp https://raw.github.com/dnath/config/master/Nix/.vimrc
+  # curl -Sso $vimrc_tmp https://raw.githubusercontent.com/dnath/config/master/Nix/.vimrc
   # file=check_time_stamp $vimrc $vimrc_tmp
 fi  
 
@@ -85,7 +85,7 @@ fi
 if [ ! -f ~/.oh-my-zsh/themes/agnoster_mod.zsh-theme ]; then
   echo 'Copying my modified version of agnoster...'
   curl -Sso ~/.oh-my-zsh/themes/agnoster_mod.zsh-theme \
-    https://raw.github.com/dnath/config/master/Nix/agnoster_mod.zsh-theme
+    https://raw.githubusercontent.com/dnath/config/master/Nix/agnoster_mod.zsh-theme
   if [ -f ~/.zshrc ]; then
     sed -i '/ZSH_THEME="robbyrussell"/c\ZSH_THEME="agnoster_mod"' ~/.zshrc
   else
@@ -96,7 +96,7 @@ fi
 ## add to zshrc
 if [ -f ~/.zshrc  ]; then
   if [ $append_zshrc = "true" ]; then
-    curl -Sso zshrc_tmp https://raw.github.com/dnath/config/master/Nix/.zshrc
+    curl -Sso zshrc_tmp https://raw.githubusercontent.com/dnath/config/master/Nix/.zshrc
     cat zshrc_tmp >> ~/.zshrc
     rm -f zshrc_tmp
   fi
