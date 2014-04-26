@@ -79,7 +79,7 @@ fi
 ##  oh-my-zsh
 if [ ! -d ~/.oh-my-zsh ]; then
   echo 'Installing oh-my-zsh...'
-  curl -L "https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh" | sh
+  curl -SsL "https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh" | sh
 fi
 
 ## oh-my-zsh theme
@@ -111,8 +111,8 @@ if [ ! -f ~/.pystartup ]; then
   curl -Sso ~/.pystartup "https://raw.githubusercontent.com/dnath/config/master/Nix/.pystartup"
   if [[ -z $(grep '^export PYTHONSTARTUP=~/.pystartup' ~/.zshrc) ]]; then
     echo 'Adding PYTHONSTARTUP env var...'
-    cat '# python startup' >> ~/.zshrc
-    cat 'export PYTHONSTARTUP=~/.pystartup' >> ~/.zshrc
+    echo '# python startup' >> ~/.zshrc
+    echo 'export PYTHONSTARTUP=~/.pystartup' >> ~/.zshrc
   fi
 fi
 
