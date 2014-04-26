@@ -1,4 +1,3 @@
-
 # git
 alias gsb='git status -sb'
 alias glog='git log'
@@ -16,3 +15,6 @@ alias grep='grep --color=auto'
 
 # vim as the default editor
 export EDITOR=vim
+
+# python startup
+export PYTHONSTARTUP=~/.pystartup
