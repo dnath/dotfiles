@@ -6,6 +6,7 @@ handle_params( ) {
   do
     ## force re-download and setup
     if [[ $param = 'force' || $param = '-f' ]]; then
+      echo 'Removing old terminal config... '
       rm -f ~/.vim/autoload/pathogen.vim
       rm -rf ~/.vim/bundle/nerdtree
       rm -f ~/.vimrc
@@ -96,6 +97,7 @@ fi
 ## add to zshrc
 if [ -f ~/.zshrc  ]; then
   if [ $append_zshrc = "true" ]; then
+    echo 'Appending to .zshrc ...'
     curl -Sso zshrc_tmp https://raw.githubusercontent.com/dnath/config/master/Nix/.zshrc
     cat zshrc_tmp >> ~/.zshrc
     rm -f zshrc_tmp
