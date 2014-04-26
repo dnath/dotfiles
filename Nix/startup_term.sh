@@ -11,6 +11,8 @@ handle_params( ) {
       rm -rf ~/.vim/bundle/nerdtree
       rm -f ~/.vimrc
       rm -rf ~/.oh-my-zsh
+      rm -f ~/.pystartup
+      rm -f ~/.pyhistory
     fi
     
     ## help
