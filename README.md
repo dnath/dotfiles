@@ -15,7 +15,7 @@ To run startup\_term.sh
 Use `force` option to delete previous configurations.
 Use `append_zshrc` option to append customizations to .zshrc.
 
-Note: You `-s` with bash when piping the script with `curl`.
+Note: Use `-s` with bash when piping the script with `curl`.
 
 linux
 -----
