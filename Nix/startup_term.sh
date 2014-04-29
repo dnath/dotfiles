@@ -1,5 +1,18 @@
 #! /bin/bash
 
+## variables
+
+# vundle_url="https://github.com/gmarik/vundle.git"
+pathogen_url="https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim"
+nerdtree_url="https://github.com/scrooloose/nerdtree.git"
+vimrc_url="https://raw.githubusercontent.com/dnath/config/master/Nix/vimrc"
+zsh_url="https://raw.githubusercontent.com/dnath/config/master/Nix/zshrc"
+pystartup_url="https://raw.githubusercontent.com/dnath/config/master/Nix/pystartup"
+ohmyzsh_script_url="https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh"
+agnoster_mod_url="https://raw.githubusercontent.com/dnath/config/master/Nix/agnoster_mod.zsh-theme"
+
+append_zshrc="false"
+
 ## handle parameters
 handle_params( ) {
   for param in $*
@@ -47,7 +60,7 @@ check_time_stamp( ) {
   fi
 }
 
-append_zshrc="false"
+### start of script
 handle_params $*
 
 ### vim
@@ -56,32 +69,27 @@ if [ ! -f ~/.vim/autoload/pathogen.vim ]; then
   echo 'Installing pathogen...'
   mkdir -p ~/.vim/autoload ~/.vim/bundle; \
     curl -Sso ~/.vim/autoload/pathogen.vim \
-        "https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim"
+        $pathogen_url
 fi
 
 ## nerdtree
 if [ ! -d ~/.vim/bundle/nerdtree ]; then
   echo 'Installing nerdtree...'
-  git clone "https://github.com/scrooloose/nerdtree.git" ~/.vim/bundle/nerdtree
+  git clone $nerdtree_url  ~/.vim/bundle/nerdtree
 fi
 
 ## vimrc
 # vimrc="~/.vimrc" # readlink -f
 if [ ! -f ~/.vimrc ]; then
   echo 'Copying vimrc ...'
-  curl -Sso ~/.vimrc "https://raw.githubusercontent.com/dnath/config/master/Nix/.vimrc"
-# else
-  # tmp='_tmp'
-  # vimrc_tmp="$vimrc$tmp"
-  # curl -Sso $vimrc_tmp https://raw.githubusercontent.com/dnath/config/master/Nix/.vimrc
-  # file=check_time_stamp $vimrc $vimrc_tmp
+  curl -Sso ~/.vimrc $vimrc_url
 fi  
 
 ### zsh 
 ##  oh-my-zsh
 if [ ! -d ~/.oh-my-zsh ]; then
   echo 'Installing oh-my-zsh...'
-  curl -SsL "https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh" | sh
+  curl -SsL $ohmyzsh_script_url | sh
   append_zshrc="true"
 fi
 
@@ -89,7 +97,7 @@ fi
 if [ ! -f ~/.oh-my-zsh/themes/agnoster_mod.zsh-theme ]; then
   echo 'Copying my modified version of agnoster...'
   curl -Sso ~/.oh-my-zsh/themes/agnoster_mod.zsh-theme \
-    "https://raw.githubusercontent.com/dnath/config/master/Nix/agnoster_mod.zsh-theme"
+    $agnoster_mod_url
   if [ -f ~/.zshrc ]; then
     sed -i '/ZSH_THEME="robbyrussell"/c\ZSH_THEME="agnoster_mod"' ~/.zshrc
   else
@@ -101,7 +109,7 @@ fi
 if [ -f ~/.zshrc  ]; then
   if [ $append_zshrc = "true" ]; then
     echo 'Appending to .zshrc ...'
-    curl -Sso zshrc_tmp "https://raw.githubusercontent.com/dnath/config/master/Nix/.zshrc"
+    curl -Sso zshrc_tmp $zshrc_url
     cat zshrc_tmp >> ~/.zshrc
     rm -f zshrc_tmp
   fi
@@ -111,7 +119,7 @@ fi
 ## add .pystartup
 if [ ! -f ~/.pystartup ]; then
   echo 'Adding ~/.pystartup...'
-  curl -Sso ~/.pystartup "https://raw.githubusercontent.com/dnath/config/master/Nix/.pystartup"
+  curl -Sso ~/.pystartup $pystartup_url
   if [[ -z $(grep '^export PYTHONSTARTUP=~/.pystartup' ~/.zshrc) ]]; then
     echo 'Adding PYTHONSTARTUP env var...'
     echo '# python startup' >> ~/.zshrc

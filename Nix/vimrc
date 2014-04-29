@@ -1,4 +1,6 @@
-set nu
+set nocompatible  " vim, not vi
+
+set nu            " line numbers
 highlight LineNr ctermbg=black
 
 set noignorecase
