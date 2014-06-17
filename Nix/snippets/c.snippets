@@ -1,10 +1,38 @@
+# read file
+snippet fr char
+	FILE *${1:fin} = NULL;
+	if (($1 = fopen(${2:filename}, "${3:r}")) != NULL) {
+		char ${4:c};
+		while (($4 = fgetc($1)) != EOF) {
+			${5}
+		}
+		fclose($1);
+	}
+snippet fr line
+	FILE *${1:fin} = NULL;
+	if (($1 = fopen(${2:filename}, "${3:r}")) != NULL) {
+		char *${4:line} = NULL;
+		size_t ${5:len};
+		while (getline(&$4, &$5, $1) != -1) {
+			${5}
+			free($4);
+		}
+		fclose($1);
+	}
+# file write
+snippet fw
+	FILE *${1:fout} = NULL;
+	if (($1 = fopen(${2:filename}, "${3:w}")) != NULL) {
+		${4}
+		fclose($1);
+	}
 # main()
 snippet main
 	int main(int argc, const char *argv[]) {
 		${1}
 		return 0;
 	}
-snippet mainn
+snippet Main
 	int main(void) {
 		${1}
 		return 0;
@@ -33,7 +61,6 @@ snippet #if
 # Header Include-Guard
 snippet once
 	#ifndef ${1:`toupper(Filename('$1_H', 'UNTITLED_H'))`}
-
 	#define $1
 
 	${2}

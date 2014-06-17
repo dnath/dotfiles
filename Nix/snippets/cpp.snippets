@@ -22,11 +22,50 @@ snippet ns
 snippet use
 	using namespace ${1:std}$2;
 # cin
-snippet cin
+snippet ci
 	cin >> ${1};
 # cout 
-snippet cout
+snippet co
 	cout << ${1};
+# write to file
+snippet fwp
+	ofstream ${1:fout}(${2:filename}, ${3:ios::out});
+	if ($1.is_open()) {
+		${4}
+		$1.close();
+	}
+# read file
+snippet frp variable
+	ifstream ${1:fin}(${2:filename}, ${3:ios::in});
+	if ($1.is_open()) {
+		while(!$1.eof()) {
+			${4:char} ${5:c};
+			$1 >> $5;
+			${6}
+		}
+		$1.close();
+	}
+snippet frp line
+	ifstream ${1:fin}(${2:filename}, ${3:ios::in});
+	if ($1.is_open()) {
+		string ${4:line};
+		while(getline($1, $4)) {
+			${5}
+		}
+		$1.close();
+	}
+snippet frp block
+	ifstream ${1:fin}(${2:filename}, ${3:ios::in});
+	if ($1.is_open()) {
+		$1.seekg(0, $1.end);
+		int ${4:block_len} = $1.tellg();
+		$1.seekg(0, $1.beg);
+		
+		char *${5:buffer} = new char [$4];
+		$1.read($5, $4);
+		${6}
+		$1.close();
+	}
 # Class
 snippet cl
 	class ${1:`Filename('$1_t', 'name')`} {

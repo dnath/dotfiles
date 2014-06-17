@@ -39,6 +39,15 @@ if has('syntax') && (&t_Co > 2)
   syntax on
 endif
 
+if has('gui_running')
+  colorscheme solarized
+  set background=dark
+" else
+"  set background=dark
+endif
+
+set mouse=a
+
 """ NERDTree
 " Ctrl+N Shortcut
 map <C-n> :NERDTreeToggle<CR>
