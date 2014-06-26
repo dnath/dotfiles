@@ -17,7 +17,7 @@ For running setup\_term.sh
 Use `force` option to delete previous configurations.
 Use `append_zshrc` option to append customizations to .zshrc.
 
-***Note:** Use `-s` with bash when piping the script with `curl`.*
+**Note:** *Use `-s` with bash when piping the script with `curl`.*
 
 
 ### pymod\_setup.sh
@@ -34,4 +34,4 @@ To run startup.sh.
 
 `$ curl -SsL "https://raw.githubusercontent.com/dnath/config/master/linux/startup.sh" | sh`
 
-***Note:** `yum` / `apt-get` is determined at runtime.*
+**Note:** *`yum` / `apt-get` is determined at runtime.*
