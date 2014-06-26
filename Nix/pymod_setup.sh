@@ -131,7 +131,7 @@ run () {
   fi
 }
 
-rumLinux () {
+run_linux () {
   if [ -n "$(command -v yum)" ]; then
     pkg_manager='yum'
   elif [ -n "$(command -v apt-get)" ]; then
@@ -159,7 +159,7 @@ if [[ "$osname" = 'Darwin' ]]; then
   run
 elif [[ "$osname" = 'Linux' ]]; then
   # Linux
- runLinux
+ run_linux
 else
   echo
   echo "Unsupported OS '$osname'"
