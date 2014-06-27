@@ -30,4 +30,4 @@ Use `append_zshrc` option to append customizations to .zshrc.
 
 For running setup\_pymodules.sh, execute the following from the terminal.
 
-`curl -SsL "https://raw.githubusercontent.com/dnath/config/master/pymod_setup.sh" | sh`
+`curl -SsL "https://raw.githubusercontent.com/dnath/config/master/setup_pymodules.sh" | sh`
