@@ -18,6 +18,7 @@ vimrc_url='https://raw.githubusercontent.com/dnath/config/master/vimrc'
 # vundle_url='https://github.com/gmarik/vundle.git'
 pathogen_url='https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim'
 nerdtree_git_url='https://github.com/scrooloose/nerdtree.git'
+solarized_vim_git_url='github.com/altercation/vim-colors-solarized.git'
 
 
 ###############################################################################
@@ -34,7 +35,7 @@ install_vim_plugins () {
   if [ ! -f ~/.vim/autoload/pathogen.vim ]; then
     echo 'Installing pathogen...'
     mkdir -p ~/.vim/autoload ~/.vim/bundle
-    curl -Sso ~/.vim/autoload/pathogen.vim $pathogen_url
+    curl -Sso ~/.vim/autoload/pathogen.vim "$pathogen_url"
   else
   	echo 'pathogen already present.'
   fi
@@ -42,9 +43,17 @@ install_vim_plugins () {
   ## nerdtree
   if [ ! -d ~/.vim/bundle/nerdtree ]; then
     echo 'Installing nerdtree...'
-    git clone $nerdtree_git_url  ~/.vim/bundle/nerdtree
+    git clone "$nerdtree_git_url"  ~/.vim/bundle/nerdtree
   else
   	echo 'Nerdtree already present.'
+  fi
+
+  ## vim solarized
+  if [ ! -d ~/.vim/bundle/vim-colors-solarized ]; then
+    echo 'Installing vim-colors-solarized...'
+    git clone "$solarized_vim_git_url"  ~/.vim/bundle/vim-colors-solarized
+  else
+    echo 'vim-colors-solarized already present.'
   fi
 
   ## vimrc
