@@ -1,7 +1,7 @@
-#! /bin/bash
+#!/bin/bash
 
 ################################################################################
-# term_setup.sh
+# setup_term.sh
 #
 # Dibyendu Nath
 # dev.nath.cs@gmail.com
@@ -13,21 +13,15 @@
 #
 ################################################################################
 
-# vundle_url="https://github.com/gmarik/vundle.git"
-pathogen_url="https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim"
-nerdtree_git_url="https://github.com/scrooloose/nerdtree.git"
+ohmyzsh_sh_url="https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh"
 
+zsh_url="https://raw.githubusercontent.com/dnath/config/master/zshrc"
 
-pystartup_url="https://raw.githubusercontent.com/dnath/config/master/Nix/pystartup"
-ohmyzsh_script_url="https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh"
-
-
-zsh_url="https://raw.githubusercontent.com/dnath/config/master/Nix/zshrc"
-
-vimrc_url="https://raw.githubusercontent.com/dnath/config/master/Nix/vimrc"
-agnoster_mod_url="https://raw.githubusercontent.com/dnath/config/master/Nix/agnoster_mod.zsh-theme"
+agnoster_mod_url="https://raw.githubusercontent.com/dnath/config/master/agnoster_mod.zsh-theme"
 
 append_zshrc="false"
+
+pystartup_url="https://raw.githubusercontent.com/dnath/config/master/pystartup"
 
 ################################################################################
 # Functions
@@ -81,33 +75,6 @@ check_time_stamp () {
   fi
 }
 
-## vim plugins
-install_vim_plugins () {
-  echo
-  echo "======================================================================"
-  echo "Setting up vim..."
-  echo "======================================================================"
-  ##  pathogen
-  if [ ! -f ~/.vim/autoload/pathogen.vim ]; then
-    echo 'Installing pathogen...'
-    mkdir -p ~/.vim/autoload ~/.vim/bundle
-    curl -Sso ~/.vim/autoload/pathogen.vim $pathogen_url
-  fi
-
-  ## nerdtree
-  if [ ! -d ~/.vim/bundle/nerdtree ]; then
-    echo 'Installing nerdtree...'
-    git clone $nerdtree_git_url  ~/.vim/bundle/nerdtree
-  fi
-
-  ## vimrc
-  # vimrc="~/.vimrc" # readlink -f
-  if [ ! -f ~/.vimrc ]; then
-    echo 'Copying vimrc ...'
-    curl -Sso ~/.vimrc $vimrc_url
-  fi  
-}
-
 ## python modules, config
 setup_python () {
   echo
@@ -137,7 +104,7 @@ setup_zsh () {
   ##  oh-my-zsh
   if [ ! -d ~/.oh-my-zsh ]; then
     echo 'Installing oh-my-zsh...'
-    curl -SsL $ohmyzsh_script_url | sh
+    curl -SsL $ohmyzsh_sh_url | sh
 
     ## forcibly append zshrc
     append_zshrc="true"
@@ -166,7 +133,6 @@ setup_zsh () {
 }
 
 
-
 ################################################################################
 # Main Script
 #
@@ -174,12 +140,13 @@ setup_zsh () {
 
 handle_params $*
 
-### vim
-install_vim_plugins
-
 ### zsh
 setup_zsh
 
 ### python
 setup_python
 
+### vim
+curl -SsL \
+  "https://raw.githubusercontent.com/dnath/config/master/setup_vim.sh" | \
+  sh

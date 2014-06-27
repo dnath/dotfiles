@@ -1,18 +1,24 @@
-# config
+# .config
  
-Various Configuration/Setup Files
+Various Configuration or Setup Files for \*Nix systems
 
 *e.g. dotfiles* 
 
-## \*Nix
 
-For \*nix systems
+## setup.sh
 
-### setup\_term.sh
+To run setup.sh, execute the following from the terminal.
 
-For running setup\_term.sh
+`$ curl -SsL "https://raw.githubusercontent.com/dnath/config/master/startup.sh" | sh`
 
-`curl -SsL "https://raw.githubusercontent.com/dnath/config/master/Nix/setup_term.sh" | bash`
+**Note:** *`yum` / `apt-get` is determined at runtime.*
+
+
+## setup\_term.sh
+
+For running setup\_term.sh, execute the following from the terminal.
+
+`curl -SsL "https://raw.githubusercontent.com/dnath/config/master/setup_term.sh" | bash`
 
 Use `force` option to delete previous configurations.
 Use `append_zshrc` option to append customizations to .zshrc.
@@ -20,18 +26,8 @@ Use `append_zshrc` option to append customizations to .zshrc.
 **Note:** *Use `-s` with bash when piping the script with `curl`.*
 
 
-### pymod\_setup.sh
+## setup\_pymodules.sh
 
-For running pymod\_setup.sh
+For running setup\_pymodules.sh, execute the following from the terminal.
 
-`curl -SsL "https://raw.githubusercontent.com/dnath/config/master/Nix/pymod_setup.sh" | sh`
-
-
-
-## Linux
-
-To run startup.sh.
-
-`$ curl -SsL "https://raw.githubusercontent.com/dnath/config/master/linux/startup.sh" | sh`
-
-**Note:** *`yum` / `apt-get` is determined at runtime.*
+`curl -SsL "https://raw.githubusercontent.com/dnath/config/master/pymod_setup.sh" | sh`
