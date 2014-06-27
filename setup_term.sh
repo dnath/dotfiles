@@ -123,14 +123,14 @@ setup_zsh () {
   ## oh-my-zsh theme
   if [ ! -f ~/.oh-my-zsh/themes/agnoster_mod.zsh-theme ]; then
     echo 'Copying modified version of agnoster...'
-    curl -Sso ~/.oh-my-zsh/themes/agnoster_mod.zsh-theme $agnoster_mod_url
+    curl -Sso ~/.oh-my-zsh/themes/agnoster_mod.zsh-theme "$agnoster_mod_url"
     if [ -f ~/.zshrc ]; then
       sed -i '/ZSH_THEME="robbyrussell"/c\ZSH_THEME="agnoster_mod"' ~/.zshrc
     else
       echo 'Unable to set zsh theme as .vimrc is missing !'
     fi
   else
-    echo 'agnoster-mod.zsh-theme already present.'
+    echo 'agnoster_mod.zsh-theme already present.'
   fi
 
   # echo "APPEND_ZSHRC = $APPEND_ZSHRC"
