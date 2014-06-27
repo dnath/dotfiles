@@ -43,7 +43,7 @@ run_common () {
   install_package "zsh"
   echo
   echo 'Setting zsh as default shell... [Relogin to get zsh]'
-  chsh -s "$(which zsh)"
+  sudo chsh -s "$(which zsh)" $USER
 }
 
 # Mac OSX
