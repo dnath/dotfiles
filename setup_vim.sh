@@ -18,7 +18,7 @@ vimrc_url='https://raw.githubusercontent.com/dnath/config/master/vimrc'
 # vundle_url='https://github.com/gmarik/vundle.git'
 pathogen_url='https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim'
 nerdtree_git_url='https://github.com/scrooloose/nerdtree.git'
-solarized_vim_git_url='github.com/altercation/vim-colors-solarized.git'
+solarized_vim_git_url='https://github.com/altercation/vim-colors-solarized.git'
 
 
 ###############################################################################
