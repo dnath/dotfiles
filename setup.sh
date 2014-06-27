@@ -8,6 +8,13 @@
 ###############################################################################
 
 ###############################################################################
+# Global Vars
+#
+###############################################################################
+
+setup_term_url='https://raw.githubusercontent.com/dnath/config/master/setup_term.sh'
+
+###############################################################################
 # Functions
 #
 ###############################################################################
@@ -108,7 +115,5 @@ fi
 ## calling setup_term.sh 
 echo
 echo 'Calling setup_term.sh ...'
-curl -SsL \
-  "https://raw.githubusercontent.com/dnath/config/master/setup_term.sh" | \
-  bash -s append_zshrc
+curl -SsL "$setup_term_url" | bash -s append_zshrc
 

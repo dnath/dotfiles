@@ -24,6 +24,8 @@ APPEND_ZSHRC="false"
 
 pystartup_url='https://raw.githubusercontent.com/dnath/config/master/pystartup'
 
+setup_vim_url='https://raw.githubusercontent.com/dnath/config/master/setup_vim.sh'
+
 ################################################################################
 # Functions
 #
@@ -165,6 +167,4 @@ setup_python
 ### vim
 echo
 echo 'Calling setup_vim.sh...'
-curl -SsL \
-  "https://raw.githubusercontent.com/dnath/config/master/setup_vim.sh" | \
-  sh
+curl -SsL "$setup_vim_url" | sh
