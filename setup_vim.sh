@@ -35,12 +35,16 @@ install_vim_plugins () {
     echo 'Installing pathogen...'
     mkdir -p ~/.vim/autoload ~/.vim/bundle
     curl -Sso ~/.vim/autoload/pathogen.vim $pathogen_url
+  else
+  	echo 'pathogen already present.'
   fi
 
   ## nerdtree
   if [ ! -d ~/.vim/bundle/nerdtree ]; then
     echo 'Installing nerdtree...'
     git clone $nerdtree_git_url  ~/.vim/bundle/nerdtree
+  else
+  	echo 'Nerdtree already present.'
   fi
 
   ## vimrc
@@ -48,7 +52,12 @@ install_vim_plugins () {
   if [ ! -f ~/.vimrc ]; then
     echo 'Copying vimrc ...'
     curl -Sso ~/.vimrc $vimrc_url
-  fi  
+  else
+  	echo 'vimrc already present.'
+  fi
+
+  echo
+  echo 'DONE'
 }
 
 ###############################################################################

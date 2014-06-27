@@ -13,15 +13,16 @@
 #
 ################################################################################
 
-ohmyzsh_sh_url="https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh"
+ohmyzsh_sh_url='https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh'
 
-zsh_url="https://raw.githubusercontent.com/dnath/config/master/zshrc"
+zshrc_url='https://raw.githubusercontent.com/dnath/config/master/zshrc'
+ZSHRC_TMP='zshrc_tmp'
 
-agnoster_mod_url="https://raw.githubusercontent.com/dnath/config/master/agnoster_mod.zsh-theme"
+agnoster_mod_url='https://raw.githubusercontent.com/dnath/config/master/agnoster_mod.zsh-theme'
 
-append_zshrc="false"
+APPEND_ZSHRC="false"
 
-pystartup_url="https://raw.githubusercontent.com/dnath/config/master/pystartup"
+pystartup_url='https://raw.githubusercontent.com/dnath/config/master/pystartup'
 
 ################################################################################
 # Functions
@@ -53,7 +54,7 @@ handle_params () {
     
     ## append zshrc
     if [[ $param = 'append_zshrc' || $param = '-z' ]]; then
-      append_zshrc="true"
+      APPEND_ZSHRC="true"
     fi
   done
 }
@@ -91,7 +92,12 @@ setup_python () {
       echo '# python startup' >> ~/.zshrc
       echo 'export PYTHONSTARTUP=~/.pystartup' >> ~/.zshrc
     fi
+  else
+    echo '.pystartup already present.'
   fi
+
+  echo
+  echo 'DONE'
 }
 
 ## zsh config
@@ -107,7 +113,9 @@ setup_zsh () {
     curl -SsL $ohmyzsh_sh_url | sh
 
     ## forcibly append zshrc
-    append_zshrc="true"
+    APPEND_ZSHRC="true"
+  else
+    echo 'oh-my-zsh already present.'
   fi
 
   ## oh-my-zsh theme
@@ -119,17 +127,25 @@ setup_zsh () {
     else
       echo 'Unable to set zsh theme as .vimrc is missing !'
     fi
+  else
+    echo 'agnoster-mod.zsh-theme already present.'
   fi
 
+  # echo "APPEND_ZSHRC = $APPEND_ZSHRC"
   ## append to zshrc
-  if [ $append_zshrc = "true" ]; then
+  if [ "$APPEND_ZSHRC" = "true" ]; then
     if [ -f ~/.zshrc  ]; then
       echo 'Appending to .zshrc ...'
-      curl -Sso zshrc_tmp $zshrc_url
-      cat zshrc_tmp >> ~/.zshrc
-      rm -f zshrc_tmp
+      curl -Sso "$ZSHRC_TMP" "$zshrc_url"
+      cat "$ZSHRC_TMP" >> ~/.zshrc
+      rm -f "$ZSHRC_TMP"
     fi
+  else
+    echo 'Not appending to zshrc.'
   fi
+
+  echo
+  echo 'DONE'
 }
 
 
@@ -147,6 +163,8 @@ setup_zsh
 setup_python
 
 ### vim
+echo
+echo 'Calling setup_vim.sh...'
 curl -SsL \
   "https://raw.githubusercontent.com/dnath/config/master/setup_vim.sh" | \
   sh
