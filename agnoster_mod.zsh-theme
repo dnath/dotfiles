@@ -1,5 +1,5 @@
 ###############################################################################
-# Modified agnoster.theme
+# Modified agnoster.zsh-theme
 # Original Author: Isaac Wolkerstorfer
 # Ref: https://gist.github.com/3712874
 ###############################################################################
