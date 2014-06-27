@@ -9,7 +9,7 @@ Various Configuration or Setup Files for \*Nix systems
 
 To run setup.sh, execute the following from the terminal.
 
-`$ curl -SsL "https://raw.githubusercontent.com/dnath/config/master/startup.sh" | sh`
+`$ curl -SsL "https://raw.githubusercontent.com/dnath/config/master/setup.sh" | sh`
 
 **Note:** *`yum` / `apt-get` is determined at runtime.*
 
@@ -24,6 +24,12 @@ Use `force` option to delete previous configurations.
 Use `append_zshrc` option to append customizations to .zshrc.
 
 **Note:** *Use `-s` with bash when piping the script with `curl`.*
+
+## setup\_vim.sh
+
+For running setup\_vim.sh, execute the following from the terminal.
+
+`curl -SsL "https://raw.githubusercontent.com/dnath/config/master/setup_vim.sh" | sh`
 
 
 ## setup\_pymodules.sh
