@@ -31,6 +31,7 @@ sympy_git_tag='sympy-0.7.5'
 
 # nose
 
+# nltk
 
 ##############################################################################
 #
@@ -95,7 +96,10 @@ install_py_modules () {
   sudo pip install pandas
 
   ## nose
-  sudo pip install nose   
+  sudo pip install nose
+
+  ## nltk
+  sudo pip install -U pyyaml nltk
 }
 
 run () {
