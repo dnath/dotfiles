@@ -131,7 +131,7 @@ setup_zsh () {
         sed -i '' 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster_mod"/' .zshrc
       else
         echo "OS $OSNAME not supported !"
-      fi 
+      fi
     else
       echo 'Unable to set zsh theme as .vimrc is missing !'
     fi
