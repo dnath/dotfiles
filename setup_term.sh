@@ -127,7 +127,7 @@ setup_zsh () {
     if [ -f ~/.zshrc ]; then
       if [ "$OSNAME" = 'Linux' ]; then
         sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster_mod"/' .zshrc
-      elif [ "$OSNAME" = 'Darwin' ]
+      elif [ "$OSNAME" = 'Darwin' ]; then
         sed -i '' 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster_mod"/' .zshrc
       else
         echo "OS $OSNAME not supported !"
