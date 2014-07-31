@@ -125,8 +125,14 @@ setup_zsh () {
     echo 'Copying modified version of agnoster...'
     curl -Sso ~/.oh-my-zsh/themes/agnoster_mod.zsh-theme "$agnoster_mod_url"
     if [ -f ~/.zshrc ]; then
-      sed -i '/ZSH_THEME="robbyrussell"/c\ZSH_THEME="agnoster_mod"' ~/.zshrc
-    else
+      if [ "$OSNAME" = 'Linux' ]; then
+        sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster_mod"/' .zshrc
+      elif [ "$OSNAME" = 'Darwin' ]
+        sed -i '' 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster_mod"/' .zshrc
+      else
+        echo "OS $OSNAME not supported !"
+      fi 
+   else
       echo 'Unable to set zsh theme as .vimrc is missing !'
     fi
   else
@@ -155,6 +161,8 @@ setup_zsh () {
 # Main Script
 #
 ################################################################################
+
+OSNAME=$(uname)
 
 handle_params $*
 
