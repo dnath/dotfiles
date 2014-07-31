@@ -132,7 +132,7 @@ setup_zsh () {
       else
         echo "OS $OSNAME not supported !"
       fi 
-   else
+    else
       echo 'Unable to set zsh theme as .vimrc is missing !'
     fi
   else
