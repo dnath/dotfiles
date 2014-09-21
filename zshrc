@@ -26,3 +26,8 @@ export EDITOR=vim
 # for zsh
 alias rake='noglob rake'
 alias brake='noglob bundle exec rake'
+
+# go
+launchctl setenv GOROOT /usr/local/go
+launchctl setenv GOPATH /Users/$USER/go
+
