@@ -18,6 +18,7 @@ alias ...='cd ../..'
 
 # grep
 alias grep='grep --color=auto'
+alias rgrep='grep -R -n'
 
 # vim as the default editor
 export EDITOR=vim
