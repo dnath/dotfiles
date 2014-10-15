@@ -108,6 +108,9 @@ call pathogen#helptags()    " generate helptags for everything in 'runtimepath'
 " Color Settings
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" go
+set rtp+=$GOROOT/misc/vim
+
 "" syntax on
 filetype plugin indent on
 if has('syntax')
