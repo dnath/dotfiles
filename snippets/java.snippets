@@ -1,5 +1,5 @@
 snippet sc
-	Scanner sc = new Scanner(${1:System.in});
+	Scanner scanner = new Scanner(${1:System.in});
 snippet serr
 	System.err.println(${1});
 snippet sout
@@ -74,7 +74,9 @@ snippet tc
 snippet t
 	public void test${1:Name}() throws Exception ${2}
 snippet cl
-	class ${1:`Filename("", "untitled")`} ${2}
+	class ${1:`Filename("", "untitled")`} {
+		${2}
+	}
 snippet in
 	interface ${1:`Filename("", "untitled")`} ${2:extends Parent}${3}
 snippet m
@@ -90,13 +92,11 @@ snippet as
 snippet try
 	try {
 		${3}
-	} catch(${1:Exception} ${2:e}) {
-	}
+	} catch(${1:Exception} ${2:e}) { }
 snippet tryf
 	try {
 		${3}
 	} catch(${1:Exception} ${2:e}) {
-	} finally {
-	}
+	} finally { }
 snippet rst
 	ResultSet ${1:rst}${2: = null}${3};${4}
