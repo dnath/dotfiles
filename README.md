@@ -1,8 +1,8 @@
-# .config
+# config
  
-Various Configuration or Setup Files for \*Nix systems
-
-*e.g. dotfiles* 
+Configuration/Setup Files for \*Nix systems
+  
+    e.g. dotfiles 
 
 
 ## setup.sh

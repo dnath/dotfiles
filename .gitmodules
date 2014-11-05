@@ -1,0 +1,12 @@
+[submodule "vim/vim-pathogen"]
+	path = vim/vim-pathogen
+	url = https://github.com/tpope/vim-pathogen
+[submodule "vim/vim-colors-solarized"]
+	path = vim/vim-colors-solarized
+	url = https://github.com/altercation/vim-colors-solarized
+[submodule "vim/snipmate.vim"]
+	path = vim/snipmate.vim
+	url = https://github.com/msanders/snipmate.vim
+[submodule "vim/nerdtree"]
+	path = vim/nerdtree
+	url = https://github.com/scrooloose/nerdtree

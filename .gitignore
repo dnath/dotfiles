@@ -1,2 +1,5 @@
-# .DS_Store
+# OS Crumbs
 .DS_Store
+
+# IDE
+.idea/

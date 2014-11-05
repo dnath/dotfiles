@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ###############################################################################
 # setup.sh
@@ -12,108 +12,80 @@
 #
 ###############################################################################
 
-setup_term_url='https://raw.githubusercontent.com/dnath/config/master/setup_term.sh'
+OSLIST=(Darwin Linux)
+OSNAME=`uname`
+PKG_MNGR=''
 
 ###############################################################################
 # Functions
 #
 ###############################################################################
 
-## install package
-install_package () {
-  pkg_name="$1"
-  
-  echo
-  echo '======================================================================'
-  echo " Package: $pkg_name" 
-  echo '======================================================================'
-  
-  if [[ -z "$(command -v $pkg_name)" ]]; then
-    echo "Installing $pkg_name..."
-    sudo $PKG_MANAGER -y install $pkg_name
+init () {
+  check_os
+  set_package_manager
+}
+
+set_package_manager () {
+  if [[ $OSNAME = "Darwin" ]]; then
+    if [[ -n "$(command -v brew)" ]]; then
+      PKG_MNGR="brew"
+    else
+      if [[ -z "$(command -v ruby)" ]]; then
+        echo "Please install ruby! Ruby is required for installing brew."
+        exit 1
+      else
+        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+      fi
+    fi
+
+  elif [[ $OSNAME = "Linux" ]]; then
+    if [[ -n "$(command -v apt-get)" ]]; then
+      PKG_MNGR="sudo apt-get -y"
+    elif [[ -n "$(command -v yum)" ]]; then
+      PKG_MNGR="sudo yum -y"
+    else
+      echo "No supported package manager found! Exiting."
+      exit 1
+    fi
   else
-    echo "$pkg_name already installed."
+    echo "Unsupported OS! Exiting."
+    exit 1
   fi
-
-  echo
-  echo 'DONE'
 }
 
-# common to Nix
-run_common () {
-  install_package "curl"
-  install_package "gcc"
-  install_package "git"
-  install_package "vim"
-  install_package "python"
-
-  install_package "zsh"
-  echo
-  echo 'Setting zsh as default shell... [Relogin to get zsh]'
-  sudo chsh -s "$(which zsh)" $USER
-}
-
-# Mac OSX
-run_mac () {
-  run_common
-}
-
-# Linux
-run_linux () {
-  ## build-essential : make
-  if [[ -z "$(command -v make)" ]]; then
-    echo 'Installing build-essential...'
-    sudo $PKG_MANAGER -y install build-essential
+check_install_pkg () {
+  PKG="$1"
+  if [[ -z "$(command -v $PKG)" ]]; then
+    $PKG_MNGR install $PKG
   fi
-  
-  run_common
-  
-  ### openssh server
-  # install_package "openssh-server"
-
-  ### javac
-  # if [ -z "$(command -v javac)" ]; then
-  #   echo 'Installing openjdk-7-jdk icedtea-7-plugin...'
-  #   sudo $PKG_MANAGER -y install openjdk-7-jdk icedtea-7-plugin
-  # fi
 }
 
+check_os () {
+  IS_SUPPORTED_OS="false"
+  for OS in $OSLIST
+  do
+    if [[ $OS = $OSNAME ]]; then
+      IS_SUPPORTED_OS="true"
+    fi
+  done
+
+  if [[ $IS_SUPPORTED_OS = "false" ]]; then
+    echo "OS, '$OSNAME' is not supported! Exiting."
+    exit 1
+  fi
+}
 
 ###############################################################################
 # Main Script
 #
 ###############################################################################
 
-OSNAME=$(uname)
+init
+check_install_pkg "curl"
+check_install_pkg "git"
+check_install_pkg "ruby"
 
-if [[ "$OSNAME" = 'Linux' ]]; then
-  # Linux
-  if [[ -n "$(command -v yum)" ]]; then
-    PKG_MANAGER='yum'
-  elif [[ -n "$(command -v apt-get)" ]]; then
-    PKG_MANAGER='apt-get'
-  else
-    echo 'Failed to find yum/apt-get in Linux !!'
-    exit
-  fi
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/dnath/config/master/configure.rb)"
 
-  run_linux
-
-elif [[ "$OSNAME" = 'Darwin' ]]; then
-  # Mac OSX
-  if [[ -n "$(command -v brew)" ]]; then
-    PKG_MANAGER='brew'
-  else
-    echo 'Failed to find brew in Mac OSX !!'
-    exit
-  fi
-
-  run_mac
-
-fi
-
-## calling setup_term.sh 
-echo
-echo 'Calling setup_term.sh ...'
-curl -SsL "$setup_term_url" | bash -s append_zshrc
 
