@@ -1,8 +1,4 @@
-# .config
- 
-Various Configuration or Setup Files for \*Nix systems
-
-*e.g. dotfiles* 
+# dotfiles
 
 
 ## setup.sh
@@ -37,3 +33,7 @@ For running setup\_vim.sh, execute the following from the terminal.
 For running setup\_pymodules.sh, execute the following from the terminal.
 
 `curl -SsL "https://raw.githubusercontent.com/dnath/config/master/setup_pymodules.sh" | bash`
+
+# hterm
+
+https://github.com/wernight/powerline-web-fonts
