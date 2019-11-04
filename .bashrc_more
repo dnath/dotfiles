@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ -f ~/.shell/config.sh ]; then
+  source ~/.shell/config.sh
+fi
+
+# More bashrc configs.
+source_if_exists ~/.shell/path.sh
+
+source_if_exists ~/.shell/aliases.sh
+source_if_exists ~/.bash/aliases.bash
+
+source_if_exists ~/.bash/prompt.bash
