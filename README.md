@@ -52,7 +52,8 @@ TODO(dnath): Add them.
 ### Installation
 
 ```shell
-cd ${REPO}
+git clone --recursive git@github.com:dnath/dotfiles.git
+cd dotfiles
 stow -vt ~ .
 ```
 
