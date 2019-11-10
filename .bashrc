@@ -18,14 +18,15 @@ shopt -s histappend
 HISTSIZE=1000
 HISTFILESIZE=2000
 
-
 # Check the window size after each command and if necessary, update the values
 # of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# if set, the pattern "**" used in a pathname expansion context will match all
-# files and zero or more directories and subdirectories.
-shopt -s globstar
+if [ ${IS_LINUX} ]; then
+  # if set, the pattern "**" used in a pathname expansion context will match all
+  # files and zero or more directories and subdirectories.
+  shopt -s globstar
+fi
 
 # Make less more friendly for non-text input files, see lesspipe(1).
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -34,15 +35,6 @@ shopt -s globstar
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
   debian_chroot=$(cat /etc/debian_chroot)
 fi
-
-# If this is an xterm, set title to user@host:dir
-case "${XTERM}" in
-  xterm*|rxvt*)
-    PS1="\[e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-  *)
-    ;;
-esac
 
 # Enable programmable completion features (This is not needed as it already
 # enabled in /etc/bash.bashrc abd /etc/profile sources /etc/bash/bash.bashrc.)
