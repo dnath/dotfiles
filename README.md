@@ -17,7 +17,6 @@
 
         https://packagecontrol.io/installation
 
-
 1.  Install vim.
 
 1.  Install [powerline fonts](https://github.com/powerline/fonts)
