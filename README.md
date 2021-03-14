@@ -109,7 +109,7 @@ TODO(dnath): Add more custom packages, if any.
 
 1.  On your local laptop browser, open https://remotedesktop.google.com/headless.
     Then follow the steps to set up another computer. You would probably copy
-    the relecant command to your remote shell, similar to this:
+    the relevant command to your remote shell, similar to this:
 
     ```shell
     DISPLAY= /opt/google/chrome-remote-desktop/start-host \
