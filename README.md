@@ -93,6 +93,8 @@ TODO(dnath): Add more custom packages, if any.
 
 ### Install headless chrome remote desktop in Linux
 
+Before starting, please update packages using `sudo apt update` and make sure you have `wget` installed.
+
 1. On the remote machine, install chromote:
 
     ```shell
