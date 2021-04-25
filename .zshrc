@@ -27,10 +27,10 @@ ZSH_THEME="agnoster_mod"
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
+DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+export UPDATE_ZSH_DAYS=30
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -103,6 +103,7 @@ source "${ZSH}/oh-my-zsh.sh"
 alias ohmyzsh="vim ${ZSH}"
 
 # More stuff.
-if [ -f ~/.zshrc_more ]; then
-  source ~/.zshrc_more
-fi
+source "${HOME}/lib/scriptalicious/logging.sh" || echo "Cannot source ${HOME}/lib/scriptalicious/logging.sh!"
+source "${HOME}/lib/scriptalicious/util.sh" || log::fatal "Cannot source ${HOME}/lib/scriptalicious/util.sh!"
+
+source_if_exists "${HOME}/.zshrc_more"

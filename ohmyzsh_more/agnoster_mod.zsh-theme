@@ -242,8 +242,8 @@ prompt_aws() {
   esac
 }
 
-## Main prompt
-build_prompt() {
+## Main prompt header
+build_prompt_header() {
   RETVAL=$?
   prompt_status
   prompt_virtualenv
@@ -256,4 +256,21 @@ build_prompt() {
   prompt_end
 }
 
-PROMPT='%{%f%b%k%}$(build_prompt) '
+## Main prompt
+build_prompt() {
+  # The following can used to reflect access status, if any.
+  #
+  # if ${access_status} = 1; then
+  #   prompt_segment green black '\u2691'
+  # else
+  #   prompt_segment red black '\u2691'
+  # fi
+
+  prompt_segment green black '\u2691'
+
+  prompt_segment blue black '$'
+  prompt_end
+}
+
+PROMPT='%{%f%b%k%}$(build_prompt_header)
+$(build_prompt) '
