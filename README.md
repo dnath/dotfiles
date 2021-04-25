@@ -62,7 +62,7 @@
 1. Before installing you may want to cleanup any straggler `.*rc` files like:
 
     ```shell
-    rm -f .bashrc .zshrc
+    rm -f ~/.bashrc ~/.zshrc
     ```
 
 2. Clone and install dotfiles:

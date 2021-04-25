@@ -47,6 +47,6 @@ if ! shopt -oq posix; then
 fi
 
 # More customizatios.
-if [ -f ~/.bashrc_more ]; then
-  source ~/.bashrc_more
-fi
+source "${HOME}/lib/scriptalicious/logging.sh" || echo "Cannot source ${HOME}/lib/scriptalicious/logging.sh!"
+source "${HOME}/lib/scriptalicious/util.sh" || log::fatal "Cannot source ${HOME}/lib/scriptalicious/util.sh!"
+source_if_exists ~/.bashrc_more
