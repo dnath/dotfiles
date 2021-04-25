@@ -17,7 +17,7 @@
    >
    > You may also use `brew` to install `git`.
 
-4. Install [brew](/help/brew_setup.md) and packages like `wget`, `stow`, `vim`, etc.
+4. Install [brew](/doc/brew_setup.md) and packages like `wget`, `stow`, `vim`, etc.
 5. Install [iTerm2](https://iterm2.com/downloads.html).
 6. Install dark solarized theme for iTerm2, terminal and vim.
 
@@ -46,10 +46,10 @@
     ```
 
 2. Install more file editors:
-   1. Install [Sublime and its packages](/help/sublime_setup.md).
-   2. Install [Visual Studio Code](/help/visual_studio_code_setup.md).
+   1. Install [Sublime and its packages](/doc/sublime_setup.md).
+   2. Install [Visual Studio Code](/doc/visual_studio_code_setup.md).
 3. Install [Powerline Fonts](https://github.com/powerline/fonts)
-4. Install [python, pip and related packages](/help/python_setup.md).
+4. Install [python, pip and related packages](/doc/python_setup.md).
 
 ## Installation
 
@@ -63,13 +63,14 @@
 
     ```shell
     git clone --recursive git@github.com:dnath/dotfiles.git
+
     cd dotfiles
     stow -vt ~ .
     ```
 
 ### Optional Steps
 
-1. Customize terminal prompt for [zsh](/.oh-my-zsh_more/agnoster_mod.zsh-theme) or [bash](.bash/prompt.bash).
+1. Customize terminal prompt for [zsh](/ohmyzsh_more/agnoster_mod.zsh-theme) or [bash](.bash/prompt.bash).
 
 ## FAQs
 
