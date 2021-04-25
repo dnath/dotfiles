@@ -19,8 +19,8 @@
 
 4. Install [brew](/doc/brew_setup.md) and packages like `wget`, `stow`, `vim`, etc.
 5. Install [iTerm2](https://iterm2.com/downloads.html).
-6. Install dark solarized theme for iTerm2, terminal and vim.
-7. Install [Powerline Fonts](https://github.com/powerline/fonts)
+6. Install [Powerline Fonts](https://github.com/powerline/fonts).
+7. Install dark solarized theme for iTerm2 & terminal.
 
 ### For Linux
 
@@ -36,7 +36,7 @@
     sudo apt install --assume-yes wget stow git-all zsh vim
     ```
 
-3. Install dark solarized theme for terminal and vim.
+3. Install dark solarized theme for terminal.
 4. Install [Powerline Fonts](https://github.com/powerline/fonts)
 
     ```shell
@@ -58,6 +58,7 @@
    2. Install [Visual Studio Code](/doc/visual_studio_code_setup.md).
 
 3. Install [python, pip and related packages](/doc/python_setup.md).
+4. Install and customize [vim](/doc/vim_setup.md)
 
 ## Installation
 
