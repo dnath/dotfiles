@@ -75,6 +75,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'altercation/vim-colors-solarized'
 
 " UltiSnips from https://github.com/SirVer/ultisnips
+" TODO(dnath): Need to make it work with vim+py3 in macOS.
 " Plugin 'SirVer/ultisnips'
 
 " Git plugin from https://github.com/tpope/vim-fugitive
@@ -121,7 +122,7 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Indentation, Tabs, TextWidth Settings
+" Indentation, Tabs
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -133,11 +134,6 @@ set smartindent
 set tabstop=2
 set shiftwidth=2
 set expandtab	
-
-"" 
-" set textwidth=79
-" set colorcolumn=80
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Status Line
@@ -225,4 +221,19 @@ imap <C-r> <C-o>:call Repeat()<cr>
 "" Remember last cursor position
 au BufReadPost * if line("'\"") > 1 
 	 \ && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Indentation, Tabs, TextWidth Settings
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"" Notify if text width > 80c
+"" Ref: https://stackoverflow.com/questions/235439/vim-80-column-layout-concerns
+highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
+match OverLength /\%81v.\+/
+
+"" 
+" set textwidth=79
+" set colorcolumn=80
 
