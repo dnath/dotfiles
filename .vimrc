@@ -1,7 +1,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " .vimrc
 " 
-" Dibyendu Nath
+" Dev Nath
 " dev.nath.cs@gmail.com 
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -22,7 +22,7 @@ endfunction
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"" vim, not vi
+"" vim, not vi; be iMproved ;)
 set nocompatible
 
 "" Play nice with tmux (already in iterm2)
@@ -51,6 +51,74 @@ set ffs=unix,dos,mac
 " set foldnestmax=2
 " set foldlevelstart=1
 " set foldenable
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vundle settings
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+
+" Solarized color scheme from https://github.com/altercation/vim-colors-solarized
+Plugin 'altercation/vim-colors-solarized'
+
+" UltiSnips from https://github.com/SirVer/ultisnips
+" Plugin 'SirVer/ultisnips'
+
+" Git plugin from https://github.com/tpope/vim-fugitive
+Plugin 'tpope/vim-fugitive'
+
+" Nerdtree from https://github.com/preservim/nerdtree
+Plugin 'preservim/nerdtree'
+" Nerdcommenter from https://github.com/preservim/nerdcommenter
+Plugin 'preservim/nerdcommenter'
+
+" delimitMate from https://github.com/Raimondi/delimitMate
+Plugin 'Raimondi/delimitMate'
+
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+
+" Git plugin not hosted on GitHub
+" Plugin 'git://git.wincent.com/command-t.git'
+
+" git repos on your local machine (i.e. when working on your own plugin)
+" Plugin 'file:///home/gmarik/path/to/plugin'
+
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Indentation, Tabs, TextWidth Settings
@@ -82,14 +150,6 @@ set statusline=%f\ %m%r%h\ %w\ %y\ %=Line:\ %l\ Column:\ %c
 set laststatus=2
 "" Hide the default mode text (e.g. -- INSERT -- below the statusline)
 " set noshowmode
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Pathogen Init
-"
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-execute pathogen#infect()
-call pathogen#helptags()    " generate helptags for everything in 'runtimepath'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -165,6 +225,4 @@ imap <C-r> <C-o>:call Repeat()<cr>
 "" Remember last cursor position
 au BufReadPost * if line("'\"") > 1 
 	 \ && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-
 
