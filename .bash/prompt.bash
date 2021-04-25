@@ -28,5 +28,5 @@ esac
 
 unset color_prompt force_color_prompt
 
-# byobu
-[ -r ~/.byobu/prompt ] && . ~/.byobu/prompt
+# For byobu
+# test -r ~/.byobu/prompt && source ~/.byobu/prompt
