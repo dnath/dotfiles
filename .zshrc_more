@@ -9,7 +9,4 @@ source_if_exists ~/.shell/path.sh
 
 source_if_exists ~/.shell/aliases.sh
 
-# go
-launchctl setenv GOROOT /usr/local/go
-launchctl setenv GOPATH /Users/$USER/go
 

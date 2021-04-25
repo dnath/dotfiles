@@ -20,6 +20,7 @@
 4. Install [brew](/doc/brew_setup.md) and packages like `wget`, `stow`, `vim`, etc.
 5. Install [iTerm2](https://iterm2.com/downloads.html).
 6. Install dark solarized theme for iTerm2, terminal and vim.
+7. Install [Powerline Fonts](https://github.com/powerline/fonts)
 
 ### For Linux
 
@@ -29,13 +30,18 @@
     sudo apt update
     ```
 
-2. Install `wget`, `stow`, `git` and `vim`.
+2. Install `wget`, `stow`, `git`, `zsh` and `vim`.
 
     ```shell
-    sudo apt install --assume-yes wget stow git-all vim
+    sudo apt install --assume-yes wget stow git-all zsh vim
     ```
 
 3. Install dark solarized theme for terminal and vim.
+4. Install [Powerline Fonts](https://github.com/powerline/fonts)
+
+    ```shell
+    sudo apt-get install fonts-powerline
+    ```
 
 ### Common Steps
 
@@ -48,8 +54,8 @@
 2. Install more file editors:
    1. Install [Sublime and its packages](/doc/sublime_setup.md).
    2. Install [Visual Studio Code](/doc/visual_studio_code_setup.md).
-3. Install [Powerline Fonts](https://github.com/powerline/fonts)
-4. Install [python, pip and related packages](/doc/python_setup.md).
+
+3. Install [python, pip and related packages](/doc/python_setup.md).
 
 ## Installation
 
@@ -62,8 +68,17 @@
 2. Clone and install dotfiles:
 
     ```shell
-    git clone --recursive git@github.com:dnath/dotfiles.git
+    mkdir -p git
+    cd git
 
+    git clone --recursive git@github.com:dnath/dotfiles.git
+    ```
+
+    Alternatively use `git clone --recursive  https://github.com/dnath/dotfiles` if keys are not set up.
+
+    To install, run:
+
+    ```shell
     cd dotfiles
     stow -vt ~ .
     ```
