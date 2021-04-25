@@ -36,8 +36,6 @@ sudo apt-get install --assume-yes wget
         --name=
     ```
 
-## Optional Steps
-
 ### Install a desktop GUI environment in remote machine
 
 You may want to follow the steps in
@@ -49,7 +47,7 @@ Additional steps for it are:
 1. Install Xfce as it performs the best without fancy animations over a slow network.
 
     ```shell
-    sudo DEBIAN_FRONTEND=noninteractive apt install --assume-yes xfce4 desktop-
+    sudo DEBIAN_FRONTEND=noninteractive apt install --assume-yes xfce4 desktop-base
     ```
 
 1. Configure Chrome Remote Desktop to use Xfce by default:
@@ -70,7 +68,9 @@ Additional steps for it are:
     sudo systemctl disable lightdm.service
     ```
 
-### Install chrome browser
+## Optional Steps
+
+### Install Chrome browser
 
 ```shell
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb

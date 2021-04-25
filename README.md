@@ -51,6 +51,8 @@
     chsh -s $(which zsh)
     ```
 
+    > Alternatively, use `sudo chsh -s $(which zsh) ${USER}` password is not set for the user.
+
 2. Install more file editors:
    1. Install [Sublime and its packages](/doc/sublime_setup.md).
    2. Install [Visual Studio Code](/doc/visual_studio_code_setup.md).
@@ -74,7 +76,7 @@
     git clone --recursive git@github.com:dnath/dotfiles.git
     ```
 
-    Alternatively use `git clone --recursive  https://github.com/dnath/dotfiles` if keys are not set up.
+    > Alternatively use `git clone --recursive  https://github.com/dnath/dotfiles` if keys are not set up.
 
     To install, run:
 

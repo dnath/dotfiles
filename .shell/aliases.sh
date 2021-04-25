@@ -6,8 +6,7 @@ alias grlog='git ref log'
 
 # ls
 alias ls='ls -hF -G'
-alias ll='ls -l -h'
-alias lla='ls -l -a'
+alias ll='ls -lha'
 
 # cd
 alias ..='cd ..'
