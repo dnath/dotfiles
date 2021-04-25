@@ -13,14 +13,14 @@ Ref: <https://brew.sh/>
 ```shell
 brew install wget
 brew install stow
+brew install vim
+brew install git
 brew install tree
 ```
 
 ## More optional `brew` packages
 
 ```shell
-brew install git
-
 brew tap bazelbuild/tap
 brew tap-pin bazelbuild/tap
 brew install bazelbuild/tap/bazel
