@@ -242,6 +242,11 @@ prompt_aws() {
   esac
 }
 
+prompt_current_time() {
+  local current_time=$(date)
+  prompt_segment black blue "${current_time}"
+}
+
 ## Main prompt header
 build_prompt_header() {
   RETVAL=$?
@@ -249,9 +254,10 @@ build_prompt_header() {
   prompt_virtualenv
   prompt_aws
   prompt_context
+  prompt_current_time
   prompt_dir
   prompt_git
-  prompt_bzr
+  # prompt_bzr
   # prompt_hg  ## disabled.
   prompt_end
 }
