@@ -51,7 +51,7 @@
     chsh -s $(which zsh)
     ```
 
-    > Alternatively, use `sudo chsh -s $(which zsh) ${USER}` password is not set for the user.
+    > Alternatively, use `gsudo chsh -s $(which zsh) ${USER}` password is not set for the user.
 
 2. Install more file editors:
    1. Install [Sublime and its packages](/doc/sublime_setup.md).

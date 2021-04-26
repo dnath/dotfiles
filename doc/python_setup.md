@@ -15,7 +15,7 @@ rm -f get-pip.py
 For linux:
 
 ```shell
-sudo apt install python3-pip
+sudo apt install --assume-yes python3-pip
 ```
 
 ### Upgrade pip
