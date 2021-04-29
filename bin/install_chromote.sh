@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Usage: curl -s https://github.com/dnath/dotfiles/blob/master/bin/install_chromote.sh | bash
+# Usage: /bin/bash -c "$(curl -fsSL https://github.com/dnath/dotfiles/master/bin/install_chromote.sh)"
 
 # Regular foreground colors    
 SC_COLOR_red='\e[0;31m'
@@ -76,7 +76,6 @@ fi
 sudo apt update
 
 log::info "Installing wget..."
-ffff
 sudo apt-get install --assume-yes wget
 [[ $? -eq 0 ]] || log::error "wget installation failed!"
 
