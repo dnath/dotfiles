@@ -34,13 +34,14 @@
 
     ```shell
     sudo apt install --assume-yes wget stow git-all zsh vim
+    sudo apt install --assume-yes --fix-broken
     ```
 
 3. Install dark solarized theme for terminal.
 4. Install [Powerline Fonts](https://github.com/powerline/fonts)
 
     ```shell
-    sudo apt-get install fonts-powerline
+    sudo apt-get install --assume-yes fonts-powerline
     ```
 
 ### Common Steps
@@ -48,10 +49,8 @@
 1. Set `zsh` as default.
 
     ```shell
-    chsh -s $(which zsh)
+    sudo chsh -s $(which zsh) $USER
     ```
-
-    > Alternatively, use `gsudo chsh -s $(which zsh) ${USER}` password is not set for the user.
 
 2. Install more file editors:
    1. Install [Sublime and its packages](/doc/sublime_setup.md).
