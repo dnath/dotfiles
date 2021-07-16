@@ -13,11 +13,13 @@
 
 3. Install `git`.
 
-   > For MacOS, `git --version` will trigger the UI dialog for installation, if not installation already.
+   > For MacOS, `git --version` will trigger the UI dialog for installation, if
+   > not installed already.
    >
    > You may also use `brew` to install `git`.
 
-4. Install [brew](/doc/brew_setup.md) and packages like `wget`, `stow`, `vim`, etc.
+4. Install [brew](/doc/brew_setup.md) and packages like `wget`, `stow`, `vim`,
+   etc.
 5. Install [iTerm2](https://iterm2.com/downloads.html).
 6. Install [Powerline Fonts](https://github.com/powerline/fonts).
 7. Install dark solarized theme for iTerm2 & terminal.

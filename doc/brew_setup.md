@@ -21,9 +21,13 @@ brew install tree
 ## More optional `brew` packages
 
 ```shell
+# Developer helpers
 brew tap bazelbuild/tap
 brew tap-pin bazelbuild/tap
 brew install bazelbuild/tap/bazel
+
+# Download helpers
+brew install youtube-dl ffmpeg
 ```
 
 ## FAQs
