@@ -46,7 +46,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# More customizatios.
-source "${HOME}/lib/scriptalicious/logging.sh" || echo "Cannot source ${HOME}/lib/scriptalicious/logging.sh!"
-source "${HOME}/lib/scriptalicious/util.sh" || log::fatal "Cannot source ${HOME}/lib/scriptalicious/util.sh!"
+# More customizations.
+SCRIPTY_LIB="${HOME}/lib/scripty"
+source "${SCRIPTY_LIB}/logging.sh" || echo "Cannot source ${SCRIPTY_LIB}/logging.sh!"
+source "${SCRIPTY_LIB}/util.sh" || log::fatal "Cannot source ${SCRIPTY_LIB}/util.sh!"
 source_if_exists ~/.bashrc_more

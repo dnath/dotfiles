@@ -1,4 +1,6 @@
-source ${HOME}/lib/scriptalicious/logging.sh || echo "Could not source ${HOME}/lib/scriptalicious/logging.sh!"
+SCRIPTY_LIB="${HOME}/lib/scripty"
+
+source ${SCRIPTY_LIB}/logging.sh || echo "Could not source ${SCRIPTY_LIB}//logging.sh!"
 
 function source_if_exists() {
   if [ -f $1 ]; then

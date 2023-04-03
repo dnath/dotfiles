@@ -1,6 +1,8 @@
 # Library for logging
 
-source ${HOME}/lib/scriptalicious/colors.sh || (echo "Cannot source ${HOME}/lib/scriptalicious/colors.sh!" && exit -1)
+SCRIPTY_LIB="${HOME}/lib/scripty"
+
+source ${SCRIPTY_LIB}/colors.sh || (echo "Cannot source ${SCRIPTY_LIB}/colors.sh!" && exit -1)
 
 function log::info {
   print::green "$@"
