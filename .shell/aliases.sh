@@ -24,3 +24,7 @@ alias brake='noglob bundle exec rake'
 alias zshc='vim ~/.zshrc'
 alias bashc='vim ~/.bashrc'
 alias vimc='vim ~/.vimrc'
+
+alias private_mode='unset HISTFILE'
+alias zshp='unset HISTFILE'
+alias bashp='unset HISTFILE'
