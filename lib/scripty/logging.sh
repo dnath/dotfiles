@@ -2,7 +2,7 @@
 
 SCRIPTY_LIB="${HOME}/lib/scripty"
 
-source ${SCRIPTY_LIB}/colors.sh || (echo "Cannot source ${SCRIPTY_LIB}/colors.sh!" && exit -1)
+source "${SCRIPTY_LIB}/colors.sh" || (echo "Cannot source ${SCRIPTY_LIB}/colors.sh!" && exit -1)
 
 function log::info {
   print::green "$@"

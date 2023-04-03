@@ -1,4 +1,5 @@
-source ${HOME}/lib/scriptalicious/logging.sh || echo "Cannot source ${HOME}/lib/scriptalicious/logging.sh!"
+SCRIPTY_LIB="${HOME}/lib/scripty"
+source "${SCRIPTY_LIB}/logging.sh" || echo "Cannot source ${SCRIPTY_LIB}/logging.sh!"
 
 # Detect current OS and set vars.
 OS=
@@ -28,7 +29,7 @@ else
   log::error 'Could not detect current OS!'
 fi
 
-source ${HOME}/lib/scriptalicious/util.sh || log::fatal "Cannot source ${HOME}/lib/scriptalicious/util.sh!"
+source "${SCRIPTY_LIB}/util.sh" || log::fatal "Cannot source ${SCRIPTY_LIB}/util.sh!"
 
 # Preferred editor for local vs remote sessions.
 if is_ssh; then
