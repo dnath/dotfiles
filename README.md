@@ -78,7 +78,9 @@
     git clone --recursive git@github.com:dnath/dotfiles.git
     ```
 
-    > Alternatively use `git clone --recursive  https://github.com/dnath/dotfiles` if keys are not set up.
+    > Alternatively use
+    > `git clone --recursive  https://github.com/dnath/dotfiles` if keys are
+    > not set up.
 
     To install, run:
 
@@ -89,7 +91,8 @@
 
 ### Optional Steps
 
-1. Customize terminal prompt for [zsh](/ohmyzsh_more/agnoster_mod.zsh-theme) or [bash](.bash/prompt.bash).
+1. Customize terminal prompt for [zsh](/ohmyzsh_more/agnoster_mod.zsh-theme)
+   or [bash](.bash/prompt.bash).
 
 ## FAQs
 
