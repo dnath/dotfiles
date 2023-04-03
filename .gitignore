@@ -1,2 +1,8 @@
 # .DS_Store
 .DS_Store
+
+
+# History
+.zsh_history
+.bash_history
+.python_history
