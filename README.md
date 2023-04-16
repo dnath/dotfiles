@@ -29,6 +29,8 @@
 7. Install [Powerline Fonts](https://github.com/powerline/fonts).
 8. Install dark solarized theme for iTerm2 & terminal.
 
+   NOTE: Solarized theme may come already installed in iTerm2.
+
 ### For Linux
 
 1. Update package list
@@ -75,6 +77,8 @@
     ```
 
 2. Clone and install dotfiles:
+
+    > __Optional__ : Setup [Github SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account).
 
     ```shell
     mkdir -p git
