@@ -10,19 +10,24 @@
     ```shell
     xcode-select --install
     ```
+3. Accept xcode license
 
-3. Install `git`.
+    ```shell
+    sudo xcodebuild -license
+    ```
+
+4. Install `git`.
 
    > For MacOS, `git --version` will trigger the UI dialog for installation, if
    > not installed already.
    >
    > You may also use `brew` to install `git`.
 
-4. Install [brew](/doc/brew_setup.md) and packages like `wget`, `stow`, `vim`,
+5. Install [brew](/doc/brew_setup.md) and packages like `wget`, `stow`, `vim`,
    etc.
-5. Install [iTerm2](https://iterm2.com/downloads.html).
-6. Install [Powerline Fonts](https://github.com/powerline/fonts).
-7. Install dark solarized theme for iTerm2 & terminal.
+6. Install [iTerm2](https://iterm2.com/downloads.html).
+7. Install [Powerline Fonts](https://github.com/powerline/fonts).
+8. Install dark solarized theme for iTerm2 & terminal.
 
 ### For Linux
 
