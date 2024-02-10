@@ -33,13 +33,15 @@ for src in *.{jpeg,JPEG,jpg,JPG}; do
         continue
     fi
 
-    # Get the creation date time stamp of the target file, saved as 't'.
+
+    # Get the creation date time stamp of the target file, saved as 'creation_date'.
     creation_date="$(/usr/bin/GetFileInfo -d "${src}")"
 
     # Conversion
     /usr/bin/sips -s format heic "${src}" --out "${target}"
     
-    # Set the modified and creation date time stamps of the target file to the saved value held in 't'.
+
+    # Set the modified and creation date time stamps of the target file to the saved value held in 'creation_date'.
     /usr/bin/SetFile -m "${creation_date}" -d "${creation_date}" "${target}"
 
     echo "Converted file: ${target}"
