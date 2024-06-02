@@ -25,6 +25,9 @@ endfunction
 "" vim, not vi; be iMproved ;)
 set nocompatible
 
+"" Make backspace work like in other programs.
+set backspace=indent,eol,start
+
 "" Play nice with tmux (already in iterm2)
 set term=xterm-256color
 
