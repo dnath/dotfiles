@@ -7,4 +7,4 @@
 # elif [ ${IS_MACOS} ]; then
 #   export PATH="${PATH}:/foo/bar/baz"
 # fi
-export PATH="${HOME}/bin:${HOME}/lib:${HOME}/.rvm/bin:${HOME}/bin:${HOME}/.local/bin:${PATH}"
+export PATH="${HOME}/bin:${HOME}/lib:${HOME}/.rvm/bin:${HOME}/bin:${HOME}/.local/bin:${HOME}/venv/bin:${PATH}"

@@ -1,0 +1,9 @@
+beautifulsoup4
+numpy
+pandas
+pipreqs
+plotly
+python-dateutil
+requests
+scipy
+urllib3
