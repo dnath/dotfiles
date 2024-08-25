@@ -5,9 +5,21 @@
 [diff]
   tool = meld
 [difftool]
-  prompt = false
+	prompt = false
 [difftool "meld"]
   cmd = meld "$LOCAL" "$REMOTE"
+
+[diff "jupyternotebook"]
+  command = git-nbdiffdriver diff
+[merge "jupyternotebook"]
+  driver = git-nbmergedriver merge %O %A %B %L %P
+  name = jupyter notebook merge driver
+[difftool "nbdime"]
+  cmd = git-nbdifftool diff \"$LOCAL\" \"$REMOTE\" \"$BASE\"
+[mergetool "nbdime"]
+  cmd = git-nbmergetool merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+[mergetool]
+  prompt = false
 
 [merge]
   tool = meld
@@ -27,4 +39,3 @@
 
 [filter "strip-notebook-output"]
   clean = "jupyter nbconvert --ClearOutputPreprocessor.enabled=True --to=notebook --stdin --stdout --log-level=ERROR"
-
