@@ -1,0 +1,13 @@
+beautifulsoup4
+ipykernel
+itables
+nbdime
+numpy
+pandas
+pipreqs
+plotly
+python-dateutil
+requests
+scipy
+urllib3
+yfinance
