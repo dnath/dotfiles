@@ -5,6 +5,7 @@ ipykernel
 itables
 matplotlib
 nbdime
+nbstripout
 numpy
 ofxparse
 pandas
