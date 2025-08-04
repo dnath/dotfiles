@@ -14,5 +14,6 @@ pytest
 python-dateutil
 requests
 scipy
+tabulate
 urllib3
 yfinance
