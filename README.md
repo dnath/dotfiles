@@ -10,6 +10,7 @@
     ```shell
     xcode-select --install
     ```
+
 3. Accept xcode license
 
     ```shell
