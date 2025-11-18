@@ -9,6 +9,12 @@ sudo apt update
 sudo apt-get install --assume-yes wget
 ```
 
+Additionally, consider running:
+
+```shell
+sudo apt upgrade -y
+```
+
 ## Install Chromote in remote machine
 
 1. On the remote machine, install chromote:
@@ -16,14 +22,21 @@ sudo apt-get install --assume-yes wget
     ```shell
     wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
     sudo dpkg --install chrome-remote-desktop_current_amd64.deb
+    ```
+
+    Follow-up, if needed:
+
+    ```shell
     sudo apt install --assume-yes --fix-broken
     ```
 
-1. Add your user account to the Linux group:
+1. \[Optional\] Add your user account to the Linux group:
 
     ```shell
     sudo usermod -a -G chrome-remote-desktop $USER
     ```
+
+    Most likely not needed anymore.
 
 1. On your local laptop browser, open <https://remotedesktop.google.com/headless>.
     Then follow the steps to set up another computer. You would probably copy
@@ -47,7 +60,7 @@ Additional steps for it are:
 1. Install Xfce as it performs the best without fancy animations over a slow network.
 
     ```shell
-    sudo DEBIAN_FRONTEND=noninteractive apt install --assume-yes xfce4 desktop-base
+    sudo apt install -y xfce4 xfce4-goodies dbus-x11
     ```
 
 1. Configure Chrome Remote Desktop to use Xfce by default:
