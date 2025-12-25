@@ -9,5 +9,5 @@ source_if_exists ~/.shell/path.sh
 
 source_if_exists ~/.shell/aliases.sh
 
-source_if_exists ~/venv/bin/default_activate.sh
+source_if_exists ~/venv/bin/jupyter_activate.sh
 
