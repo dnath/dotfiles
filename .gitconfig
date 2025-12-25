@@ -45,3 +45,9 @@
 	required = true
 [diff "ipynb"]
 	textconv = "python3 -m nbstripout -t"
+
+[core]
+	fsmonitor = false
+	untrackedCache = true
+	preloadIndex = false
+	splitIndex = false
