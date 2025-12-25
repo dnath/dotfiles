@@ -1,4 +1,6 @@
 beautifulsoup4
+fastapi
+Flask
 freezegun
 holidays
 ipykernel
@@ -17,4 +19,5 @@ requests
 scipy
 tabulate
 urllib3
+uvicorn
 yfinance
