@@ -2,7 +2,17 @@
 
 ## Install Pip
 
-NOTE: `pip` is already installed if you are using Python 2 >=2.7.9 or Python 3 >=3.4 downloaded from python.org or if you are working in a Virtual Environment created by `virtualenv` or `venv`. Just make sure to upgrade pip.
+`pip` is already installed if you are using Python 2 >=2.7.9 or Python 3 >=3.4 downloaded from python.org or if you are working in a Virtual Environment created by `virtualenv` or `venv`. Just make sure to upgrade pip.
+
+If using without a virtual enviroment, you may need to use `pip3` rather than `pip`.
+
+To upgrade pip:
+
+```shell
+pip install -U pip
+```
+
+### For cases where we need to install `pip`
 
 For macOS:
 
@@ -18,88 +28,65 @@ For linux:
 sudo apt install --assume-yes python3-pip
 ```
 
-### Upgrade pip
-
-For linux / macOS:
-
-```shell
-pip3 install -U pip
-```
-
 Ref: <https://pip.pypa.io/en/stable/installing/>
 
-## Interesting pip packages
+## Setting up `venv` environments
 
-### Powerline Status for Vim
+* To install, use one of the installation scripts in `venv/install/`
+
+  Example:
+
+  ```shell
+  ${REPO}/venv/install/setup_jupyter_venv.sh
+  ```
+
+* To activate:
+  
+  ```shell
+  source ${HOME}/venv/.venv/${ENV}/bin/activate
+  ```
+
+* To deactivate:
+  
+  ```shell
+  deactivate
+  ```
+
+* To delete simply deactivate and delete the `venv` dir.
+
+Ref: <https://python.land/virtual-environments/virtualenv>
+
+## Useful pip packages
+
+### Some essentials
 
 ```shell
-pip3 install powerline-status
+pip install numpy pandas matplotlib plotly
+```
+
+### For ipython notebooks
+
+```shell
+pip install ipykernel itables
+```
+
+### Web serving frameworks
+
+```shell
+pip install fastapi Flask
+```
+
+### ML libraries
+
+```shell
+pip install scikit-learn tensorflow keras
+pip install torch torchvision
+```
+
+### Status Line for Vim
+
+```shell
+pip install powerline-status
 ```
 
 Ref: <https://github.com/powerline/powerline>
-
-### numpy
-
-```shell
-pip3 install numpy
-```
-
-Ref: <https://numpy.org/install/>
-
-### pandas
-
-```shell
-pip3 install pandas
-```
-
-Ref:
-
-1. <https://pandas.pydata.org/docs/getting_started/install.html>
-2. <https://pandas.pydata.org/getting_started.html>
-
-## matplotlib
-
-```shell
-pip3 install -U pip
-pip3 install -U matplotlib
-```
-
-Ref: <https://matplotlib.org/stable/users/installing.html#installing-an-official-release>
-
-### Scikit-learn (sklearn)
-
-```shell
-pip3 install -U scikit-learn
-```
-
-Ref: <https://scikit-learn.org/stable/install.html>
-
-### TensorFlow
-
-```shell
-# Requires the latest pip
-pip3 install -U pip
-
-# Current stable release for CPU and GPU
-pip3 install tensorflow
-```
-
-Ref: <https://www.tensorflow.org/install>
-
-### Keras
-
-### Django
-
-```shell
-pip3 install Django==${VERSION}
-```
-
-Ref: <https://www.djangoproject.com/download/>
-
-### Flask
-
-```shell
-pip3 install Flask
-```
-
-Ref: <https://flask.palletsprojects.com/en/1.1.x/installation/>
