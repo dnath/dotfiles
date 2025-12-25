@@ -1,3 +1,5 @@
+# zmodload zsh/zprof
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -52,7 +54,7 @@ export UPDATE_ZSH_DAYS=30
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -107,4 +109,9 @@ SCRIPTY_LIB="${HOME}/lib/scripty"
 source "${SCRIPTY_LIB}/logging.sh" || echo "Cannot source ${SCRIPTY_LIB}/logging.sh!"
 source "${SCRIPTY_LIB}/util.sh" || log::fatal "Cannot source ${SCRIPTY_LIB}/util.sh!"
 
+# For more modular configs.
+# - Example: for PATH, look at .shell/path.sh
 source_if_exists "${HOME}/.zshrc_more"
+
+# Uncomment to profile zsh.
+# zprof
