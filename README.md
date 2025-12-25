@@ -24,25 +24,12 @@
    >
    > You may also use `brew` to install `git`.
 
-5. Install [brew](/doc/brew_setup.md)
-6. Install some useful pacakages like `git`, `python`, `wget`, `stow`, `vim`.
-   etc.
+5. Install [brew](/doc/brew_setup.md) and install some useful brew packages
+   following the instructions there.
 
-   ```shell
-   brew install git python jupyterlab wget stow vim tree
-   ```
-
-   Install some apps like `meld`, `texmaker`.
-
-   ```shell
-   brew install texmaker meld
-   ```
-
-   NOTE: Delete previous apps installed if there is conflict.
-
-8. Install [iTerm2](https://iterm2.com/downloads.html).
-9. Install [Powerline Fonts](https://github.com/powerline/fonts).
-10. Install dark solarized theme for iTerm2 & terminal.
+6. Install [iTerm2](https://iterm2.com/downloads.html).
+7. Install [Powerline Fonts](https://github.com/powerline/fonts).
+8. Install dark solarized theme for iTerm2 & terminal.
 
    NOTE: Solarized theme may come already installed in iTerm2.
 
