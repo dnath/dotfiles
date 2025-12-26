@@ -47,7 +47,10 @@
 	textconv = "python3 -m nbstripout -t"
 
 [core]
-	fsmonitor = false
+	fsmonitor = true
 	untrackedCache = true
 	preloadIndex = false
 	splitIndex = false
+
+[status]
+	aheadBehind = false

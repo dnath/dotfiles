@@ -31,6 +31,9 @@ ZSH_THEME="agnoster_mod"
 # Uncomment the following line to automatically update without prompting.
 DISABLE_UPDATE_PROMPT="true"
 
+# skip scanning untracked files in prompt
+DISABLE_UNTRACKED_FILES_DIRTY="true"
+
 # Uncomment the following line to change how often to auto-update (in days).
 export UPDATE_ZSH_DAYS=30
 
