@@ -118,3 +118,6 @@ source_if_exists "${HOME}/.zshrc_more"
 
 # Uncomment to profile zsh.
 # zprof
+
+# Added by Antigravity IDE
+export PATH="/Users/xerxes/.antigravity-ide/antigravity-ide/bin:$PATH"
