@@ -51,6 +51,7 @@
 	untrackedCache = true
 	preloadIndex = false
 	splitIndex = false
+	autocrlf = input
 
 [status]
 	aheadBehind = false
