@@ -104,6 +104,7 @@
 
 1. Customize terminal prompt for [zsh](/ohmyzsh_more/agnoster_mod.zsh-theme)
    or [bash](.bash/prompt.bash).
+2. [Convert JPEGs to HEIC on macOS](doc/to_heic.md).
 
 ## FAQs
 
