@@ -1,10 +1,4 @@
 {
-  "model": "sonnet",
-  "enabledPlugins": {
-    "frontend-design@claude-plugins-official": true,
-    "github@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true
-  },
   "skillOverrides": {
     "superpowers:using-superpowers": "user-invocable-only",
     "superpowers:brainstorming": "user-invocable-only",
@@ -21,9 +15,21 @@
     "superpowers:writing-plans": "user-invocable-only",
     "superpowers:writing-skills": "user-invocable-only"
   },
-  "effortLevel": "xhigh",
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true,
+    "github@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "modern-web-guidance@claude-plugins-official": true
+  },
+  "effortLevel": "high",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    }
+  },
   "tui": "fullscreen",
   "editorMode": "normal",
+  "remoteControlAtStartup": true,
   "agentPushNotifEnabled": true,
-  "remoteControlAtStartup": true
+  "model": "opus"
 }
