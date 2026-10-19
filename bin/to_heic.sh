@@ -5,8 +5,17 @@ if [[ $(uname -s) != Darwin ]]; then
     exit 1
 fi
 
+recursive=0
+while getopts ':r' option; do
+    case $option in
+        r) recursive=1 ;;
+        *) printf 'Usage: %s [-r] SOURCE_DIRECTORY\n' "${0##*/}" >&2; exit 1 ;;
+    esac
+done
+shift $((OPTIND - 1))
+
 if [[ $# -ne 1 || ! -d $1 ]]; then
-    printf 'Usage: %s SOURCE_DIRECTORY\n' "${0##*/}" >&2
+    printf 'Usage: %s [-r] SOURCE_DIRECTORY\n' "${0##*/}" >&2
     exit 1
 fi
 
@@ -47,10 +56,20 @@ if [[ -z ${NO_COLOR:-} && ${TERM:-dumb} != dumb ]] && command -v tput >/dev/null
     fi
 fi
 
-shopt -s nullglob nocaseglob
-for src in *.jpg *.jpeg; do
+find_args=()
+if (( ! recursive )); then
+    find_args=(-maxdepth 1)
+fi
+
+while IFS= read -r -d '' src; do
+    src=${src#./}
     ((total += 1))
     target=${src%.*}.heic
+    src_dir=${src%/*}
+    if [[ $src_dir == "$src" ]]; then
+        src_dir=.
+    fi
+    archived_src=$src_dir/$archive_dir/${src##*/}
 
     if [[ -e $target || -L $target ]]; then
         printf '%sSKIP%s  %s: target already exists (%s)\n' "$yellow_out" "$reset_out" "$src" "$target"
@@ -58,7 +77,7 @@ for src in *.jpg *.jpeg; do
         continue
     fi
 
-    if [[ -e $archive_dir/$src || -L $archive_dir/$src ]]; then
+    if [[ -e $archived_src || -L $archived_src ]]; then
         printf '%sSKIP%s  %s: archived source already exists\n' "$yellow_out" "$reset_out" "$src"
         ((skipped += 1))
         continue
@@ -84,8 +103,8 @@ for src in *.jpg *.jpeg; do
         continue
     fi
 
-    if ! mkdir -p -- "$archive_dir" ||
-       ! mv -n -- "./$src" "$archive_dir/" ||
+    if ! mkdir -p -- "$src_dir/$archive_dir" ||
+       ! mv -n -- "./$src" "$src_dir/$archive_dir/" ||
        [[ -e $src ]]; then
         printf '%sFAIL%s  %s: could not archive source; HEIC kept\n' "$red_err" "$reset_err" "$src" >&2
         ((failed += 1))
@@ -94,14 +113,16 @@ for src in *.jpg *.jpeg; do
 
     printf '%sOK%s    %s -> %s\n' "$green_out" "$reset_out" "$src" "$target"
     ((converted += 1))
-done
+done < <(find . "${find_args[@]}" \
+    \( -type d \( -name "$archive_dir" -o -name skipped_source_files \) -prune \) -o \
+    \( \( -type f -o -type l \) \( -iname '*.jpg' -o -iname '*.jpeg' \) -print0 \))
 
 printf '\nSummary: %d found, %s%d converted%s, %s%d skipped%s, %s%d failed%s.\n' \
     "$total" "$green_out" "$converted" "$reset_out" \
     "$yellow_out" "$skipped" "$reset_out" "$red_out" "$failed" "$reset_out"
 
 cleanup_failed=0
-if ((total > 0 && converted == total && skipped == 0 && failed == 0)) &&
+if (( ! recursive && total > 0 && converted == total && skipped == 0 && failed == 0 )) &&
    [[ -d $archive_dir && ! -L $archive_dir ]]; then
     archived_entries=$(find "$archive_dir" -mindepth 1 -print | wc -l)
     archived_entries=${archived_entries//[[:space:]]/}
