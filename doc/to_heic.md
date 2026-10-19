@@ -6,6 +6,8 @@ Run `bin/to_heic.sh` on macOS with a directory of images:
 bin/to_heic.sh "/path/to/photos"
 # Include JPEGs in subdirectories:
 bin/to_heic.sh -r "/path/to/photos"
+# Delete archived originals after every JPEG converts successfully:
+bin/to_heic.sh -r -y "/path/to/photos"
 ```
 
 The script processes `.jpg` and `.jpeg` files in that directory, regardless of
@@ -29,15 +31,14 @@ colored when the terminal supports color; set `NO_COLOR=1` to disable it.
 
 ## Cleanup confirmation
 
-Without `-r`, if at least one JPEG was found and every JPEG converted with no
-skips or failures, the script offers to delete `converted_source_files`. It shows the
-number of entries and the exact command first. In an interactive terminal,
-type `DELETE` to confirm or press Enter to keep the directory. Without an
-interactive terminal, the script keeps it. If a legacy
-`skipped_source_files` directory exists and is empty, the same confirmation
-also removes it. Recursive runs keep all archive directories for review.
+If at least one JPEG was found and every JPEG converted with no skips or
+failures, the script can delete the originals archived by that run. It lists
+the exact cleanup commands and their count first. Without `-r` or `-y`, type
+`DELETE` at the terminal prompt to confirm; a noninteractive run keeps the
+originals. With `-y`, cleanup proceeds without a prompt, including when used
+with `-r`. Recursive runs without `-y` keep the originals.
 
-**Check the HEIC files before confirming.** Deleting
-`converted_source_files` deletes *everything* inside it, including files from
-previous runs and any other file types placed there. Other files in the source
-directory, such as `.mov` videos, are never part of this cleanup.
+Cleanup removes only JPEGs archived by the current run and removes their
+archive directories if they become empty. Files from previous runs and other
+contents of those directories remain. **Use `-y` only when you are ready to
+delete the original JPEGs without checking the HEIC files first.**

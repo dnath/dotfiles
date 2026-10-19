@@ -6,16 +6,18 @@ if [[ $(uname -s) != Darwin ]]; then
 fi
 
 recursive=0
-while getopts ':r' option; do
+assume_yes=0
+while getopts ':ry' option; do
     case $option in
         r) recursive=1 ;;
-        *) printf 'Usage: %s [-r] SOURCE_DIRECTORY\n' "${0##*/}" >&2; exit 1 ;;
+        y) assume_yes=1 ;;
+        *) printf 'Usage: %s [-r] [-y] SOURCE_DIRECTORY\n' "${0##*/}" >&2; exit 1 ;;
     esac
 done
 shift $((OPTIND - 1))
 
 if [[ $# -ne 1 || ! -d $1 ]]; then
-    printf 'Usage: %s [-r] SOURCE_DIRECTORY\n' "${0##*/}" >&2
+    printf 'Usage: %s [-r] [-y] SOURCE_DIRECTORY\n' "${0##*/}" >&2
     exit 1
 fi
 
@@ -36,6 +38,7 @@ converted=0
 skipped=0
 failed=0
 total=0
+archived_sources=()
 
 green_out= yellow_out= red_out= reset_out=
 red_err= reset_err=
@@ -103,7 +106,8 @@ while IFS= read -r -d '' src; do
         continue
     fi
 
-    if ! mkdir -p -- "$src_dir/$archive_dir" ||
+    if [[ -L $src_dir/$archive_dir ]] ||
+       ! mkdir -p -- "$src_dir/$archive_dir" ||
        ! mv -n -- "./$src" "$src_dir/$archive_dir/" ||
        [[ -e $src ]]; then
         printf '%sFAIL%s  %s: could not archive source; HEIC kept\n' "$red_err" "$reset_err" "$src" >&2
@@ -113,6 +117,7 @@ while IFS= read -r -d '' src; do
 
     printf '%sOK%s    %s -> %s\n' "$green_out" "$reset_out" "$src" "$target"
     ((converted += 1))
+    archived_sources+=("$archived_src")
 done < <(find . "${find_args[@]}" \
     \( -type d \( -name "$archive_dir" -o -name skipped_source_files \) -prune \) -o \
     \( \( -type f -o -type l \) \( -iname '*.jpg' -o -iname '*.jpeg' \) -print0 \))
@@ -122,47 +127,40 @@ printf '\nSummary: %d found, %s%d converted%s, %s%d skipped%s, %s%d failed%s.\n'
     "$yellow_out" "$skipped" "$reset_out" "$red_out" "$failed" "$reset_out"
 
 cleanup_failed=0
-if (( ! recursive && total > 0 && converted == total && skipped == 0 && failed == 0 )) &&
-   [[ -d $archive_dir && ! -L $archive_dir ]]; then
-    archived_entries=$(find "$archive_dir" -mindepth 1 -print | wc -l)
-    archived_entries=${archived_entries//[[:space:]]/}
-    remove_skipped_dir=0
-    if [[ -d skipped_source_files && ! -L skipped_source_files ]] &&
-       [[ -z $(find skipped_source_files -mindepth 1 -print -quit) ]]; then
-        remove_skipped_dir=1
-    fi
+if (( total > 0 && converted == total && skipped == 0 && failed == 0 &&
+      (assume_yes || ! recursive) )); then
+    printf '\nThe HEIC files are ready. %d originals were archived.\n' "${#archived_sources[@]}"
+    printf 'Cleanup commands for this run:\n'
+    for archived_src in "${archived_sources[@]}"; do
+        printf '  rm -- %q\n' "$PWD/$archived_src"
+    done
 
-    printf '\nThe HEIC files are ready. The originals remain in %s.\n' \
-        "$PWD/$archive_dir"
-    printf 'Archived entries: %d.\n' "$archived_entries"
-    printf 'After verifying the HEIC files, you can delete the originals with:\n'
-    printf '  rm -r -- %q\n' "$PWD/$archive_dir"
-    if ((remove_skipped_dir)); then
-        printf '  rmdir -- %q\n' "$PWD/skipped_source_files"
-    fi
-
-    if [[ -t 0 ]]; then
-        printf 'Type DELETE to run the listed cleanup commands, or press Enter to keep the directories: '
-        if IFS= read -r confirmation && [[ $confirmation == DELETE ]]; then
-            if rm -r -- "$archive_dir"; then
-                printf '%sDeleted%s %s.\n' "$green_out" "$reset_out" "$PWD/$archive_dir"
-            else
-                printf '%sFAIL%s  Could not delete %s.\n' "$red_err" "$reset_err" "$PWD/$archive_dir" >&2
-                cleanup_failed=1
-            fi
-            if ((remove_skipped_dir)); then
-                if rmdir -- skipped_source_files; then
-                    printf '%sDeleted%s empty %s.\n' "$green_out" "$reset_out" "$PWD/skipped_source_files"
-                else
-                    printf '%sFAIL%s  Could not delete %s.\n' "$red_err" "$reset_err" "$PWD/skipped_source_files" >&2
-                    cleanup_failed=1
-                fi
+    delete_sources=$assume_yes
+    if (( ! assume_yes )); then
+        if [[ -t 0 ]]; then
+            printf 'Type DELETE to run the listed cleanup commands, or press Enter to keep the originals: '
+            if IFS= read -r confirmation && [[ $confirmation == DELETE ]]; then
+                delete_sources=1
             fi
         else
-            printf 'Directories kept.\n'
+            printf 'No interactive terminal; originals kept.\n'
         fi
-    else
-        printf 'No interactive terminal; directories kept.\n'
+    fi
+
+    if ((delete_sources)); then
+        for archived_src in "${archived_sources[@]}"; do
+            if rm -- "$archived_src"; then
+                rmdir -- "${archived_src%/*}" 2>/dev/null || :
+            else
+                printf '%sFAIL%s  Could not delete %s.\n' "$red_err" "$reset_err" "$PWD/$archived_src" >&2
+                cleanup_failed=1
+            fi
+        done
+        if (( ! cleanup_failed )); then
+            printf '%sDeleted%s %d archived originals.\n' "$green_out" "$reset_out" "${#archived_sources[@]}"
+        fi
+    elif (( ! assume_yes )) && [[ -t 0 ]]; then
+        printf 'Originals kept.\n'
     fi
 fi
 
