@@ -8,6 +8,10 @@ bin/to_heic.sh "/path/to/photos"
 bin/to_heic.sh -r "/path/to/photos"
 # Delete archived originals after every JPEG converts successfully:
 bin/to_heic.sh -r -y "/path/to/photos"
+# Convert recursively in batches of 50, deleting each batch's originals:
+bin/to_heic.sh -r -b "/path/to/photos"
+# Use a different batch size:
+bin/to_heic.sh -r -b 100 "/path/to/photos"
 ```
 
 The script processes `.jpg` and `.jpeg` files in that directory, regardless of
@@ -25,9 +29,11 @@ place and the script exits with an error after processing the remaining files.
 A failed conversion can leave a partial HEIC file that needs inspection before
 retrying.
 
-The output labels each file `OK`, `SKIP`, or `FAIL` and ends with counts of
-found, converted, skipped, and failed JPEGs. Labels and summary counts are
-colored when the terminal supports color; set `NO_COLOR=1` to disable it.
+The output labels each file `OK`, `SKIP`, or `FAIL`. Batch mode reports progress
+after each full or partial batch: processed versus total JPEGs, how many are
+left, and overall converted, skipped, failed, deleted, and archived counts. A
+final report shows the same totals after all cleanup. Set `NO_COLOR=1` to
+disable colored file labels.
 
 ## Cleanup confirmation
 
@@ -42,3 +48,11 @@ Cleanup removes only JPEGs archived by the current run and removes their
 archive directories if they become empty. Files from previous runs and other
 contents of those directories remain. **Use `-y` only when you are ready to
 delete the original JPEGs without checking the HEIC files first.**
+
+`-b [SIZE]` enables batch mode with a default size of 50 and implies `-y`.
+After each full batch of successful conversions, the script prints the cleanup
+commands and deletes that batch's archived originals. It also deletes the
+final partial batch, even if other JPEGs were skipped or failed. If cleanup
+fails, it stops converting more files and exits with an error. Use a positive
+integer for `SIZE`. Batch mode bounds the number of archived originals waiting
+for cleanup; the converted HEIC files still need disk space.
