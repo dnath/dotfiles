@@ -7,18 +7,35 @@ fi
 
 recursive=0
 assume_yes=0
-while getopts ':ry' option; do
-    case $option in
-        r) recursive=1 ;;
-        y) assume_yes=1 ;;
-        *) printf 'Usage: %s [-r] [-y] SOURCE_DIRECTORY\n' "${0##*/}" >&2; exit 1 ;;
+batch_size=0
+usage() {
+    printf 'Usage: %s [-r] [-y] [-b [SIZE]] SOURCE_DIRECTORY\n' "${0##*/}" >&2
+    exit 1
+}
+
+while (( $# > 0 )); do
+    case $1 in
+        -r) recursive=1; shift ;;
+        -y) assume_yes=1; shift ;;
+        -b)
+            batch_size=50
+            assume_yes=1
+            shift
+            if [[ ${1:-} =~ ^[0-9]+$ ]]; then
+                [[ $1 =~ ^[1-9][0-9]{0,14}$ ]] || usage
+                batch_size=$1
+                shift
+            fi
+            ;;
+        -ry|-yr) recursive=1; assume_yes=1; shift ;;
+        --) shift; break ;;
+        -*) usage ;;
+        *) break ;;
     esac
 done
-shift $((OPTIND - 1))
 
 if [[ $# -ne 1 || ! -d $1 ]]; then
-    printf 'Usage: %s [-r] [-y] SOURCE_DIRECTORY\n' "${0##*/}" >&2
-    exit 1
+    usage
 fi
 
 for tool in /usr/bin/sips /usr/bin/GetFileInfo /usr/bin/SetFile; do
@@ -37,8 +54,10 @@ archive_dir=converted_source_files
 converted=0
 skipped=0
 failed=0
-total=0
+processed=0
+deleted=0
 archived_sources=()
+cleanup_failed=0
 
 green_out= yellow_out= red_out= reset_out=
 red_err= reset_err=
@@ -59,14 +78,55 @@ if [[ -z ${NO_COLOR:-} && ${TERM:-dumb} != dumb ]] && command -v tput >/dev/null
     fi
 fi
 
+show_cleanup() {
+    local suffix=s
+    if (( ${#archived_sources[@]} == 1 )); then
+        suffix=
+    fi
+    printf '\nCleanup commands for %d archived original%s:\n' "${#archived_sources[@]}" "$suffix"
+    for archived_src in "${archived_sources[@]}"; do
+        printf '  rm -- %q\n' "$PWD/$archived_src"
+    done
+}
+
+cleanup_archived() {
+    local archived_src count=${#archived_sources[@]} suffix=s
+    if (( count == 1 )); then
+        suffix=
+    fi
+    for archived_src in "${archived_sources[@]}"; do
+        if ! rm -- "$archived_src"; then
+            printf '%sFAIL%s  Could not delete %s.\n' "$red_err" "$reset_err" "$PWD/$archived_src" >&2
+            return 1
+        fi
+        ((deleted += 1))
+        rmdir -- "${archived_src%/*}" 2>/dev/null || :
+    done
+    archived_sources=()
+    printf '%sDeleted%s %d archived original%s.\n' "$green_out" "$reset_out" "$count" "$suffix"
+}
+
+show_progress() {
+    printf '%s: %d/%d processed (%d left); %d converted, %d skipped, %d failed, %d originals deleted, %d archived.\n' \
+        "$1" "$processed" "$total" "$((total - processed))" \
+        "$converted" "$skipped" "$failed" "$deleted" "$((converted - deleted))"
+}
+
 find_args=()
 if (( ! recursive )); then
     find_args=(-maxdepth 1)
 fi
 
+sources=()
 while IFS= read -r -d '' src; do
-    src=${src#./}
-    ((total += 1))
+    sources+=("${src#./}")
+done < <(find . "${find_args[@]}" \
+    \( -type d \( -name "$archive_dir" -o -name skipped_source_files \) -prune \) -o \
+    \( \( -type f -o -type l \) \( -iname '*.jpg' -o -iname '*.jpeg' \) -print0 \))
+total=${#sources[@]}
+
+for src in "${sources[@]}"; do
+    ((processed += 1))
     target=${src%.*}.heic
     src_dir=${src%/*}
     if [[ $src_dir == "$src" ]]; then
@@ -118,23 +178,28 @@ while IFS= read -r -d '' src; do
     printf '%sOK%s    %s -> %s\n' "$green_out" "$reset_out" "$src" "$target"
     ((converted += 1))
     archived_sources+=("$archived_src")
-done < <(find . "${find_args[@]}" \
-    \( -type d \( -name "$archive_dir" -o -name skipped_source_files \) -prune \) -o \
-    \( \( -type f -o -type l \) \( -iname '*.jpg' -o -iname '*.jpeg' \) -print0 \))
+    if (( batch_size > 0 && ${#archived_sources[@]} >= batch_size )); then
+        show_cleanup
+        if ! cleanup_archived; then
+            cleanup_failed=1
+            printf 'Stopping conversions because cleanup failed.\n' >&2
+            show_progress 'Batch'
+            break
+        fi
+        show_progress 'Batch'
+    fi
+done
 
-printf '\nSummary: %d found, %s%d converted%s, %s%d skipped%s, %s%d failed%s.\n' \
-    "$total" "$green_out" "$converted" "$reset_out" \
-    "$yellow_out" "$skipped" "$reset_out" "$red_out" "$failed" "$reset_out"
-
-cleanup_failed=0
-if (( total > 0 && converted == total && skipped == 0 && failed == 0 &&
-      (assume_yes || ! recursive) )); then
+if (( batch_size > 0 )); then
+    if (( ${#archived_sources[@]} > 0 && ! cleanup_failed )); then
+        show_cleanup
+        cleanup_archived || cleanup_failed=1
+        show_progress 'Batch'
+    fi
+elif (( total > 0 && converted == total && skipped == 0 && failed == 0 &&
+        (assume_yes || ! recursive) )); then
     printf '\nThe HEIC files are ready. %d originals were archived.\n' "${#archived_sources[@]}"
-    printf 'Cleanup commands for this run:\n'
-    for archived_src in "${archived_sources[@]}"; do
-        printf '  rm -- %q\n' "$PWD/$archived_src"
-    done
-
+    show_cleanup
     delete_sources=$assume_yes
     if (( ! assume_yes )); then
         if [[ -t 0 ]]; then
@@ -148,20 +213,13 @@ if (( total > 0 && converted == total && skipped == 0 && failed == 0 &&
     fi
 
     if ((delete_sources)); then
-        for archived_src in "${archived_sources[@]}"; do
-            if rm -- "$archived_src"; then
-                rmdir -- "${archived_src%/*}" 2>/dev/null || :
-            else
-                printf '%sFAIL%s  Could not delete %s.\n' "$red_err" "$reset_err" "$PWD/$archived_src" >&2
-                cleanup_failed=1
-            fi
-        done
-        if (( ! cleanup_failed )); then
-            printf '%sDeleted%s %d archived originals.\n' "$green_out" "$reset_out" "${#archived_sources[@]}"
-        fi
+        cleanup_archived || cleanup_failed=1
     elif (( ! assume_yes )) && [[ -t 0 ]]; then
         printf 'Originals kept.\n'
     fi
 fi
+
+printf '\n'
+show_progress 'Final'
 
 ((failed == 0 && cleanup_failed == 0))
